@@ -9,6 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AbotX" Version="2.1.12" />
+        <PackageReference Include="AngleSharp" Version="0.14.0" />
         <PackageReference Include="FluentAssertions" Version="6.8.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
         <PackageReference Include="NUnit" Version="3.13.3" />
@@ -19,6 +21,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\KafkaVersionCompare\KafkaVersionCompare.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="TestData\Release.html" />
+      <EmbeddedResource Include="TestData\Release.html">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

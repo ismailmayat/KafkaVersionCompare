@@ -1,8 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e7fb6fbd_002D95ca_002D40e9_002Db990_002D432f7bfc347c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Can_Get_Contributors" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.Tests.Can_Get_Contributors&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.Tests.Can_Get_Labels&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.Tests.Can_Crawl&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.ReleaseParserTests.Parse_Should_Give_SubTasks&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.ReleaseParserTests.Parse_Should_Give_Bug&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

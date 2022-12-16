@@ -42,10 +42,17 @@ public class ReleasePageCrawler
     private async Task<IReadOnlyList<Release>> BuildReleaseFromCrawl(IEnumerable<string> releasePageUrls)
     {
 
-        var crawler = new PoliteWebCrawler();
+        var config = new CrawlConfiguration
+        {
+            MaxCrawlDepth = 0
+        };
+
+        // Create a custom scheduler that is pre-queued with the list
+        // of URLs to crawl.
+        var scheduler = new UrlScheduler(releasePageUrls);
         
-        crawler.CrawlBag.AllowedOutboundLinks = releasePageUrls;
-    
+        var crawler = new PoliteWebCrawler(config, null, null, scheduler, null, null, null, null, null);
+        
         crawler.PageCrawlCompleted += PageCrawlCompleted;
     
         await crawler.CrawlAsync(new Uri(_kafkaReleasePageToCrawl));
@@ -58,14 +65,12 @@ public class ReleasePageCrawler
     private void PageCrawlCompleted(object? sender, PageCrawlCompletedArgs e)
     {
         string url = e.CrawledPage.Uri.AbsolutePath;
-        string releasePattern = "\\d";
-        if (Regex.IsMatch(url,releasePattern))
-        {
+      // e.CrawledPage.AngleSharpHtmlDocument.QuerySelector()
             var version = new Release()
             {
                 Version = url
             };
             _releases.Add(version);
-        }
+        
     }
 }
