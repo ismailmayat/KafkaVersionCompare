@@ -1,0 +1,71 @@
+@using KafkaVersionCompare.Model
+@using KafkaVersionCompare.Services
+@model KafkaVersionCompare.Model.Comparison
+
+@{
+    var fromVersion = Model.From;
+    var toVersion = Model.To;
+    var releases = Model.Releases;
+}
+
+@if (fromVersion != null && toVersion != null && fromVersion < toVersion)
+{
+    
+    var subTasks = 0;
+    var bugs = 0;
+    var improvement = 0;
+    var newFeatures = 0;
+    var tasks = 0;
+    var tests = 0;
+    
+    var selectedReleases = new List<Release>();
+    
+    foreach (var release in  releases.OrderByDescending(x => x.Version).Where(release => release.Version != fromVersion && (release.Version >= fromVersion) && (release.Version <= toVersion)))
+    {
+        var foundRelease = releases.FirstOrDefault(x => x.Version == release.Version);
+
+        if (foundRelease == null)
+        {
+            continue;
+        }
+
+        selectedReleases.Add(foundRelease);
+
+        subTasks += release.SubTask.Count;
+        bugs += release.Bug.Count;
+        improvement += release.Improvement.Count;
+        newFeatures += release.NewFeature.Count;
+        tasks += release.Task.Count;
+        tests += release.Test.Count;
+
+    }
+    var chartItems = new Dictionary<string, int>
+    {
+        { ReleaseParser.SubTask, subTasks },
+        { ReleaseParser.Bug, bugs },
+        { ReleaseParser.Improvement, improvement },
+        { ReleaseParser.NewFeature, newFeatures },
+        { ReleaseParser.Task, tasks },
+        { ReleaseParser.Test, tests }
+    };
+
+    <div class="row">
+        <div class="col-sm-12 explain">
+            <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                    @foreach (var key in chartItems.Keys)
+                    {
+                        <div class="dot big progress">
+                            <div class="chart" data-percent="100">
+                                <p>@chartItems[key]</p>
+                            </div>
+                        </div>
+                        <div class="chartDesc">
+                            <h3><a href="#newFeatures">@key</a></h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

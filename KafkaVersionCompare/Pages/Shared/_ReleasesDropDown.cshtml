@@ -1,9 +1,16 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using KafkaVersionCompare.Model
+@using KafkaVersionCompare.Services
 @model List<IGrouping<int,KafkaVersionCompare.Model.Release>>
+@inject IReleaseBuilder ReleaseBuilder
 @{
 
     Version.TryParse(Context.Request.Query["from"], out var fromVersion);
     Version.TryParse(Context.Request.Query["to"], out var toVersion);
+    
+    var releases = await ReleaseBuilder.BuildReleaseFromCrawl();
+
+    var compare = new Comparison(fromVersion, toVersion, releases);
 }
 <form name="compare" method="get" href="@Context.Request.Path">
     <div class="row">
@@ -11,20 +18,20 @@
             <div class="row">
                 <div class="col-sm-3 titles">From:</div>
                 <div class="col-sm-9">
-                     <select name="from">
+                    <select name="from">
                         @foreach (var majorVersion in Model)
                         {
-                            var versions = majorVersion.OrderByDescending(x => x.Version);
+                            var releases = majorVersion.OrderByDescending(x => x.Version);
                             <optgroup label="@majorVersion.Key">
-                                @foreach (var version in versions)
+                                @foreach (var release in releases)
                                 {
-                                    if (fromVersion != null && version.ToString() == fromVersion.ToString())
+                                    if (fromVersion != null && release.Version.ToString() == fromVersion.ToString())
                                     {
-                                        <option name="@version.Version" selected="selected" value="@version.Version">@version.Version</option>
+                                        <option name="@release.Version" selected="selected" value="@release.Version">@release.Version</option>
                                     }
                                     else
                                     {
-                                        <option name="@version.Version" value="@version.Version">@version.Version</option>
+                                        <option name="@release.Version" value="@release.Version">@release.Version</option>
                                     }
                                 }
                             </optgroup>
@@ -38,23 +45,23 @@
                 <div class="col-sm-3 titles">To:</div>
                 <div class="col-sm-9">
                     <select name="to">
-                      @foreach (var majorVersion in Model)
-                       {
-                           var versions = majorVersion.OrderByDescending(x => x.Version);
-                           <optgroup label="@majorVersion.Key">
-                               @foreach (var version in versions)
-                               {
-                                   if (toVersion != null && version.ToString() == toVersion.ToString())
-                                   {
-                                       <option name="@version.Version" selected="selected" value="@version.Version">@version.Version</option>
-                                   }
-                                   else
-                                   {
-                                       <option name="@version.Version" value="@version.Version">@version.Version</option>
-                                   }
-                               }
-                           </optgroup>
-                       }
+                        @foreach (var majorVersion in Model)
+                        {
+                            var releases = majorVersion.OrderByDescending(x => x.Version);
+                            <optgroup label="@majorVersion.Key">
+                                @foreach (var release in releases)
+                                {
+                                    if (toVersion != null && release.Version.ToString() == toVersion.ToString())
+                                    {
+                                        <option name="@release.Version" selected="selected" value="@release.Version">@release.Version</option>
+                                    }
+                                    else
+                                    {
+                                        <option name="@release.Version" value="@release.Version">@release.Version</option>
+                                    }
+                                }
+                            </optgroup>
+                        }
                     </select>
                 </div>
             </div>
@@ -68,3 +75,4 @@
         </div>
     </div>
 </form>
+@await Html.PartialAsync("_CompareVersions",compare)
