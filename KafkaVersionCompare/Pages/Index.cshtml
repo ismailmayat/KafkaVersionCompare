@@ -1,10 +1,16 @@
 ﻿@page
+@using KafkaVersionCompare.Services
 @model IndexModel
+@inject IReleaseBuilder ReleaseBuilder
 @{
     ViewData["Title"] = "Home page";
+
+    var releases = await ReleaseBuilder.BuildReleaseFromCrawl();
+    var versions = releases.Select(x => x.Version);
+    
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Kafka Version compare</h1>
+    @await Html.PartialAsync("_ReleasesDropDown",versions)
 </div>

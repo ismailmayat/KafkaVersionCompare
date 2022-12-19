@@ -72,4 +72,33 @@ public class ReleaseParserTests
         _release.Test.Count().Should().Be(16);
     }
 
+    [Test]
+    public void Can_Parse()
+    {
+        ReleaseParser releaseParser;
+        
+        Assembly assembly = Assembly.GetExecutingAssembly();
+
+        // Get a stream for the HTML file
+        Stream stream = assembly.GetManifestResourceStream("KafkaVersionCompareTests.TestData.Failing.html");
+
+        string html=string.Empty;
+        // Read the HTML file into a string
+        using (StreamReader reader = new StreamReader(stream))
+        { 
+            html = reader.ReadToEnd();
+        }
+        
+        var parser = new HtmlParser();
+        
+        var document = parser.ParseDocument(html);
+
+        releaseParser = new ReleaseParser();
+
+        Action act = () => releaseParser.BuildRelease(document, "0.10.1");
+        act.Should().NotThrow<Exception>();
+        
+      
+    }
+
 }

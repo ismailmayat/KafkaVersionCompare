@@ -15,13 +15,15 @@ public class ReleasePageCrawlerBuilder : IReleaseBuilder
 {
     private readonly string _kafkaReleasePageToCrawl;
     private readonly ReleaseParser _releaseParser;
-
+    private readonly ILogger<ReleasePageCrawlerBuilder> _logger;
+    
     private List<Release> _releases = new();
 
-    public ReleasePageCrawlerBuilder(string kafkaReleasePageToCrawl,ReleaseParser releaseParser)
+    public ReleasePageCrawlerBuilder(string kafkaReleasePageToCrawl,ReleaseParser releaseParser, ILogger<ReleasePageCrawlerBuilder> logger)
     {
         _kafkaReleasePageToCrawl = kafkaReleasePageToCrawl;
         _releaseParser = releaseParser;
+        _logger = logger;
     }
     
     public async Task<IReadOnlyList<Release>> BuildReleaseFromCrawl()
@@ -54,9 +56,11 @@ public class ReleasePageCrawlerBuilder : IReleaseBuilder
             MaxCrawlDepth = 0
         };
 
+        _logger.LogInformation($"processing {releasePageUrls.Count()} release page urls");
+        
         // Create a custom scheduler that is pre-queued with the list
         // of URLs to crawl.
-        var scheduler = new UrlScheduler(releasePageUrls);
+        var scheduler = new UrlScheduler(releasePageUrls.OrderByDescending(x=>x));
         
         var crawler = new PoliteWebCrawler(config, null, null, scheduler, null, null, null, null, null);
         
@@ -64,6 +68,8 @@ public class ReleasePageCrawlerBuilder : IReleaseBuilder
     
         await crawler.CrawlAsync(new Uri(_kafkaReleasePageToCrawl));
     
+        _logger.LogInformation($"created {_releases.Count()} releases");
+        
         return _releases;
     }
     
@@ -74,9 +80,19 @@ public class ReleasePageCrawlerBuilder : IReleaseBuilder
         //url looks like /dist/kafka/0.10.0.1/RELEASE_NOTES.html
         string version = e.CrawledPage.Uri.AbsolutePath.Split('/')[3];
 
-        var release = _releaseParser.BuildRelease(e.CrawledPage.AngleSharpHtmlDocument, version);
+        _logger.LogInformation($"building release for {version} using url {e.CrawledPage.Uri.AbsolutePath}");
 
-        _releases.Add(release);
+        try
+        {
+            var release = _releaseParser.BuildRelease(e.CrawledPage.AngleSharpHtmlDocument, version);
+
+            _releases.Add(release);
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"could process {e.CrawledPage.Uri.AbsolutePath} {ex}");
+        }
 
     }
 }

@@ -5,7 +5,3 @@ R
 "KafkaVersionCompareTests/Usings.cs,a/b/ab0378c4184fcd37f46356c746a06c9ba77a94d8
 ^
 .KafkaVersionCompare/KafkaVersionCompare.csproj,6/7/67923b490f5080ae3d968de4aa4c323844ef9d3e
-\
-,KafkaVersionCompare/Services/UrlScheduler.cs,0/b/0b8b4d090cde4d5a10a14b7fe7cea50da9d11d93
-h
-8KafkaVersionCompareTests/KafkaVersionCompareTests.csproj,3/5/3506911697e469713fd93549f81da3aeba38ed59

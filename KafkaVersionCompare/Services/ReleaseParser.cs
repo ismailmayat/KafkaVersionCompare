@@ -24,17 +24,17 @@ public class ReleaseParser
         var release = new Release
         {
             Version = version,
-            SubTask = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(SubTask)).NextElementSibling),
+            SubTask = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(SubTask))?.NextElementSibling),
         
-            Bug = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Bug)).NextElementSibling),
+            Bug = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Bug))?.NextElementSibling),
 
-            Improvement = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Improvement)).NextElementSibling),
+            Improvement = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Improvement))?.NextElementSibling),
         
-            NewFeature = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(NewFeature)).NextElementSibling),
+            NewFeature = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(NewFeature))?.NextElementSibling),
         
-            Task = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Task)).NextElementSibling),
+            Task = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Task))?.NextElementSibling),
             
-            Test = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Test)).NextElementSibling)
+            Test = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Test))?.NextElementSibling)
         };
 
         return release;
@@ -43,15 +43,9 @@ public class ReleaseParser
     private List<Release.Issue> BuildList(IElement ul)
     {
         var tasks = new List<Release.Issue>();
-            
-        foreach (var li in ul.Children)
+        if (ul != null)
         {
-            tasks.Add(new Release.Issue
-            {
-                Id = li.FirstElementChild.Text(),
-                Title = li.TextContent,
-                Url = li.FirstElementChild.Attributes.GetNamedItem("href").Value
-            });   
+            tasks.AddRange(ul.Children.Select(li => new Release.Issue { Id = li.FirstElementChild.Text(), Title = li.TextContent, Url = li.FirstElementChild.Attributes.GetNamedItem("href").Value }));
         }
 
         return tasks;

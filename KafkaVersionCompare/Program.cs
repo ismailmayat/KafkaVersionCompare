@@ -4,9 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddLogging(fs => fs.AddConsole());
 builder.Services.AddSingleton<ReleaseParser>();
-builder.Services.AddTransient<ReleasePageCrawlerBuilder>();
+builder.Services.AddScoped<IReleaseBuilder>(ctr=> new ReleasePageCrawlerBuilder("https://archive.apache.org/dist/kafka/", ctr.GetService<ReleaseParser>(), ctr.GetService<ILoggerFactory>().CreateLogger<ReleasePageCrawlerBuilder>()));
 
 var app = builder.Build();
 
