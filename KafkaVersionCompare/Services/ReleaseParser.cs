@@ -13,13 +13,12 @@ public class ReleaseParser
     public const string NewFeature = "New Feature";
     public const string Task = "Task";
     public const string Test = "Test";
-    public ReleaseParser()
-    {
-       
-    }
+    
 
     public Release BuildRelease(IHtmlDocument htmlDocument,string version)
-    { 
+    {
+        using var document = htmlDocument;
+        
         var h2Nodes = htmlDocument.Body.QuerySelectorAll<IElement>("h2");
         
         var release = new Release

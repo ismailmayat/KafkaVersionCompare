@@ -17,7 +17,7 @@ public class CrawlTests
     [Test]
     public async Task Can_Crawl()
     {
-        var crawler = new ReleasePageCrawler("https://archive.apache.org/dist/kafka/");
+        var crawler = new ReleasePageCrawlerBuilder("https://archive.apache.org/dist/kafka/", new ReleaseParser());
 
         var versions = await crawler.BuildReleaseFromCrawl();
 

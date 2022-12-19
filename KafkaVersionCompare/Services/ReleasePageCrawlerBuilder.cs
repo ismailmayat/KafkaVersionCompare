@@ -6,15 +6,22 @@ using KafkaVersionCompare.Model;
 
 namespace KafkaVersionCompare.Services;
 
-public class ReleasePageCrawler
+public interface IReleaseBuilder
+{
+    Task<IReadOnlyList<Release>> BuildReleaseFromCrawl();
+}
+
+public class ReleasePageCrawlerBuilder : IReleaseBuilder
 {
     private readonly string _kafkaReleasePageToCrawl;
+    private readonly ReleaseParser _releaseParser;
 
     private List<Release> _releases = new();
 
-    public ReleasePageCrawler(string kafkaReleasePageToCrawl)
+    public ReleasePageCrawlerBuilder(string kafkaReleasePageToCrawl,ReleaseParser releaseParser)
     {
         _kafkaReleasePageToCrawl = kafkaReleasePageToCrawl;
+        _releaseParser = releaseParser;
     }
     
     public async Task<IReadOnlyList<Release>> BuildReleaseFromCrawl()
@@ -64,13 +71,12 @@ public class ReleasePageCrawler
 
     private void PageCrawlCompleted(object? sender, PageCrawlCompletedArgs e)
     {
-        string url = e.CrawledPage.Uri.AbsolutePath;
-      // e.CrawledPage.AngleSharpHtmlDocument.QuerySelector()
-            var version = new Release()
-            {
-                Version = url
-            };
-            _releases.Add(version);
-        
+        //url looks like /dist/kafka/0.10.0.1/RELEASE_NOTES.html
+        string version = e.CrawledPage.Uri.AbsolutePath.Split('/')[3];
+
+        var release = _releaseParser.BuildRelease(e.CrawledPage.AngleSharpHtmlDocument, version);
+
+        _releases.Add(release);
+
     }
 }
