@@ -6,24 +6,38 @@ namespace KafkaVersionCompare.Services;
 
 public class ReleaseParser
 {
-    private readonly IHtmlDocument _htmlDocument;
+
     public const string SubTask = "Sub-task";
     public const string Bug = "Bug";
-    public ReleaseParser(IHtmlDocument htmlDocument)
+    public const string Improvement = "Improvement";
+    public const string NewFeature = "New Feature";
+    public const string Task = "Task";
+    public const string Test = "Test";
+    public ReleaseParser()
     {
-        _htmlDocument = htmlDocument;
+       
     }
 
-    public Release BuildRelease()
+    public Release BuildRelease(IHtmlDocument htmlDocument,string version)
     { 
-        var release = new Release();
+        var h2Nodes = htmlDocument.Body.QuerySelectorAll<IElement>("h2");
+        
+        var release = new Release
+        {
+            Version = version,
+            SubTask = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(SubTask)).NextElementSibling),
+        
+            Bug = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Bug)).NextElementSibling),
 
-        var h2Nodes = _htmlDocument.Body.QuerySelectorAll<IElement>("h2");
+            Improvement = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Improvement)).NextElementSibling),
+        
+            NewFeature = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(NewFeature)).NextElementSibling),
+        
+            Task = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Task)).NextElementSibling),
             
-        release.SubTask = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(SubTask)).NextElementSibling);
+            Test = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Test)).NextElementSibling)
+        };
 
-        release.Bug = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Bug)).NextElementSibling);
-            
         return release;
     }
 

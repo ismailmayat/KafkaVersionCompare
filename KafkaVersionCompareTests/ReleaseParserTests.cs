@@ -13,8 +13,6 @@ public class ReleaseParserTests
     [SetUp]
     public void Init()
     {
-        string Html=string.Empty;
-
         ReleaseParser releaseParser;
         
         Assembly assembly = Assembly.GetExecutingAssembly();
@@ -26,16 +24,16 @@ public class ReleaseParserTests
         // Read the HTML file into a string
         using (StreamReader reader = new StreamReader(stream))
         { 
-            Html = reader.ReadToEnd();
+            html = reader.ReadToEnd();
         }
         
         var parser = new HtmlParser();
         
-        var document = parser.ParseDocument(Html);
+        var document = parser.ParseDocument(html);
 
-        releaseParser = new ReleaseParser(document);
+        releaseParser = new ReleaseParser();
 
-        _release = releaseParser.BuildRelease();
+        _release = releaseParser.BuildRelease(document,"0.10.1");
     }
 
     [Test]
@@ -48,6 +46,30 @@ public class ReleaseParserTests
     public void Parse_Should_Give_Bug()
     {
         _release.Bug.Count().Should().Be(7);
+    }
+
+    [Test]
+    public void Parse_Should_Give_Improvement()
+    {
+        _release.Improvement.Count().Should().Be(4);
+    }
+
+    [Test]
+    public void Parse_Should_Give_New_Feature()
+    {
+        _release.NewFeature.Count().Should().Be(3);
+    }
+
+    [Test]
+    public void Parse_Should_Give_Task()
+    {
+        _release.Task.Count().Should().Be(8);
+    }
+
+    [Test]
+    public void Parse_Should_Give_Test()
+    {
+        _release.Test.Count().Should().Be(16);
     }
 
 }
