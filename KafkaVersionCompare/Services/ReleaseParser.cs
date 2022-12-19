@@ -21,9 +21,14 @@ public class ReleaseParser
         
         var h2Nodes = htmlDocument.Body.QuerySelectorAll<IElement>("h2");
         
+        Version releaseVersion;
+        
+        Version.TryParse(version, out releaseVersion);
+        
         var release = new Release
         {
-            Version = version,
+            Version = releaseVersion,
+            
             SubTask = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(SubTask))?.NextElementSibling),
         
             Bug = BuildList(h2Nodes.FirstOrDefault(x => x.Text().Contains(Bug))?.NextElementSibling),

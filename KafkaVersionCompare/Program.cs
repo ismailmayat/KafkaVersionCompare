@@ -1,4 +1,5 @@
 using KafkaVersionCompare.Services;
+using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddLogging(fs => fs.AddConsole());
 builder.Services.AddSingleton<ReleaseParser>();
-builder.Services.AddScoped<IReleaseBuilder>(ctr=> new ReleasePageCrawlerBuilder("https://archive.apache.org/dist/kafka/", ctr.GetService<ReleaseParser>(), ctr.GetService<ILoggerFactory>().CreateLogger<ReleasePageCrawlerBuilder>()));
+builder.Services.AddScoped<IReleaseBuilder>(ctr=> new ReleasePageCrawlerBuilder("https://archive.apache.org/dist/kafka/", ctr.GetService<ReleaseParser>(), ctr.GetService<ILoggerFactory>().CreateLogger<ReleasePageCrawlerBuilder>(),ctr.GetService<IMemoryCache>()));
 
 var app = builder.Build();
 
@@ -18,13 +19,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthorization();
 
 app.MapRazorPages();
 

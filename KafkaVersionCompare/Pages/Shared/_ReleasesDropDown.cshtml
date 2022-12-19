@@ -1,15 +1,33 @@
-@model IEnumerable<string>
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<IGrouping<int,KafkaVersionCompare.Model.Release>>
+@{
 
-<form name="compare" method="get">
+    Version.TryParse(Context.Request.Query["from"], out var fromVersion);
+    Version.TryParse(Context.Request.Query["to"], out var toVersion);
+}
+<form name="compare" method="get" href="@Context.Request.Path">
     <div class="row">
         <div class="col-xs-6 col-sm-4">
             <div class="row">
                 <div class="col-sm-3 titles">From:</div>
                 <div class="col-sm-9">
-                    <select name="from">
-                        @foreach (var version in Model)
+                     <select name="from">
+                        @foreach (var majorVersion in Model)
                         {
-                            <option name="@version" value="@version">@version</option>
+                            var versions = majorVersion.OrderByDescending(x => x.Version);
+                            <optgroup label="@majorVersion.Key">
+                                @foreach (var version in versions)
+                                {
+                                    if (fromVersion != null && version.ToString() == fromVersion.ToString())
+                                    {
+                                        <option name="@version.Version" selected="selected" value="@version.Version">@version.Version</option>
+                                    }
+                                    else
+                                    {
+                                        <option name="@version.Version" value="@version.Version">@version.Version</option>
+                                    }
+                                }
+                            </optgroup>
                         }
                     </select>
                 </div>
@@ -20,9 +38,22 @@
                 <div class="col-sm-3 titles">To:</div>
                 <div class="col-sm-9">
                     <select name="to">
-                       @foreach (var version in Model)
+                      @foreach (var majorVersion in Model)
                        {
-                           <option name="@version" value="@version">@version</option>
+                           var versions = majorVersion.OrderByDescending(x => x.Version);
+                           <optgroup label="@majorVersion.Key">
+                               @foreach (var version in versions)
+                               {
+                                   if (toVersion != null && version.ToString() == toVersion.ToString())
+                                   {
+                                       <option name="@version.Version" selected="selected" value="@version.Version">@version.Version</option>
+                                   }
+                                   else
+                                   {
+                                       <option name="@version.Version" value="@version.Version">@version.Version</option>
+                                   }
+                               }
+                           </optgroup>
                        }
                     </select>
                 </div>

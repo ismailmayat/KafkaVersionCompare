@@ -16,7 +16,7 @@ namespace KafkaVersionCompare.Model;
         }
         
         [JsonProperty("version")]
-        public string? Version { get; set; }
+        public Version Version { get; set; }
         
         [JsonProperty("latestRelease")]
         public bool LatestRelease { get; set; }

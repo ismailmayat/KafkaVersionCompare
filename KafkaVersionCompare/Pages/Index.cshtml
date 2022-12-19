@@ -6,11 +6,12 @@
     ViewData["Title"] = "Home page";
 
     var releases = await ReleaseBuilder.BuildReleaseFromCrawl();
-    var versions = releases.Select(x => x.Version);
+   
+    var majorVersionGroups = releases.GroupBy(x => x.Version.Major).OrderByDescending(x => x.Key).ToList();
     
 }
 
 <div class="text-center">
     <h1 class="display-4">Kafka Version compare</h1>
-    @await Html.PartialAsync("_ReleasesDropDown",versions)
+    @await Html.PartialAsync("_ReleasesDropDown",majorVersionGroups)
 </div>
