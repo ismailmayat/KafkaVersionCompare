@@ -76,6 +76,7 @@ body {
   top: inherit;
   left: inherit;
   text-align: center;
+  clear:both;
 }
 
 .release .chart p {
@@ -126,3 +127,97 @@ body {
 .error {
   color: red !important;
 }
+
+.dot {
+  display: block;
+  position: relative;
+  margin-top: 13px;
+  background-color: #7682d6;
+  border: 3px solid #7682d6
+}
+
+.dot .line {
+  display: block;
+  position: absolute
+}
+
+.dot .line.h-line {
+  border-top: 3px solid #7682d6
+}
+
+@media (max-width: 768px) {
+  .dot .line.h-line {
+    display:none
+  }
+}
+
+.dot .line.v-line {
+  border-left: 3px solid #7682d6
+}
+
+.dot.big {
+  height: 60px;
+  width: 60px;
+  border-radius: 40px;
+  margin: 20px auto 100px;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  text-indent: .7rem;
+  color: #12173b
+}
+
+.dot.big .h-line {
+  left: 50px;
+  top: 25px;
+  width: 70px;
+  height: 1px
+}
+
+.dot.big .v-line {
+  left: 25px;
+  top: 57px;
+  width: 1px;
+  height: 100px
+}
+
+.dot.big .v-line.top {
+  top: -80px;
+  height: 80px
+}
+
+.dot.small {
+  height: 20px;
+  width: 20px;
+  border-radius: 30px;
+  margin: 0 auto 115px
+}
+
+.dot.small.last {
+  margin-top: 60px;
+  margin-bottom: 5px
+}
+
+.dot.small .h-line {
+  left: 17px;
+  top: 7px;
+  width: 70px;
+  height: 1px;
+  border-width: 1px
+}
+
+.dot.small .v-line {
+  top: 17px;
+  left: 5px;
+  width: 1px;
+  height: 120px
+}
+
+.dot.small .v-line.top {
+  height: 100px;
+  top: -90px
+}
+
+.release h3 {
+  font-size: 1.1rem;
+}
+
