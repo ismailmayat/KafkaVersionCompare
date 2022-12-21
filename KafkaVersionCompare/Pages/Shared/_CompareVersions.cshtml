@@ -49,23 +49,181 @@
         { ReleaseParser.Test, tests }
     };
 
-    <div class="row">
+    <div class="row release">
         <div class="col-sm-12 explain">
             <div class="row">
-                <div class="col-xs-12 col-sm-2">
-                    @foreach (var key in chartItems.Keys)
-                    {
+                @foreach (var key in chartItems.Keys)
+                {
+                    <div class="col-xs-12 col-sm-2">
                         <div class="dot big progress">
                             <div class="chart" data-percent="100">
                                 <p>@chartItems[key]</p>
                             </div>
                         </div>
                         <div class="chartDesc">
-                            <h3><a href="#newFeatures">@key</a></h3>
-                        </div>
-                    }
-                </div>
+                            <h3><a href="#@key.Replace(" ",string.Empty).ToLower()">@key</a></h3>
+                        </div> 
+                    </div>
+                }
             </div>
         </div>
     </div>
+    
+    <!-- actual results 
+      // var subTasks = 0;
+       // var bugs = 0;
+       // var improvement = 0;
+       // var newFeatures = 0;
+       // var tasks = 0;
+        var tests = 0;
+    -->
+ <div class="col-sm-12 statuses">
+@{
+    if (newFeatures > 0)
+    {
+         <div id="@ReleaseParser.NewFeature.Replace(" ","").ToLower()" class="status @ReleaseParser.NewFeature.Replace(" ","").ToLower()">
+             <h2>@ReleaseParser.NewFeature</h2>
+             @foreach (var release in selectedReleases)
+             {
+                 var releaseFeatures = release.NewFeature.ToList();
+                 if (releaseFeatures.Any())
+                 {
+                     <h3>@ReleaseParser.NewFeature released in version @release.Version</h3>
+
+                     foreach (var issue in releaseFeatures)
+                     {
+                         var url = issue.Url;
+                         <ul>
+                             <li>
+                                 <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                             </li>
+                         </ul>
+                     }
+                 }
+             }
+         </div>
+     }
+    if (subTasks > 0)
+    {
+        <div id="@ReleaseParser.SubTask.Replace(" ","").ToLower()" class="status @ReleaseParser.SubTask.Replace(" ","").ToLower()">
+            <h2>@ReleaseParser.SubTask</h2>
+            @foreach (var release in selectedReleases)
+            {
+                var releaseFeatures = release.NewFeature.ToList();
+                if (releaseFeatures.Any())
+                {
+                    <h3>@ReleaseParser.SubTask released in version @release.Version</h3>
+
+                    foreach (var issue in releaseFeatures)
+                    {
+                        var url = issue.Url;
+                        <ul>
+                            <li>
+                                <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    }
+    if (bugs > 0)
+    {
+        <div id="@ReleaseParser.Bug.Replace(" ","").ToLower()" class="status @ReleaseParser.Bug.Replace(" ","").ToLower()">
+            <h2>@ReleaseParser.Bug</h2>
+            @foreach (var release in selectedReleases)
+            {
+                var releaseFeatures = release.Bug.ToList();
+                if (releaseFeatures.Any())
+                {
+                    <h3>@ReleaseParser.Bug fixed in version @release.Version</h3>
+
+                    foreach (var issue in releaseFeatures)
+                    {
+                        var url = issue.Url;
+                        <ul>
+                            <li>
+                                <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    }
+    if (improvement > 0)
+    {
+        <div id="@ReleaseParser.Improvement.Replace(" ","").ToLower()" class="status @ReleaseParser.Improvement.Replace(" ","").ToLower()">
+            <h2>@ReleaseParser.Bug</h2>
+            @foreach (var release in selectedReleases)
+            {
+                var releaseFeatures = release.Improvement.ToList();
+                if (releaseFeatures.Any())
+                {
+                    <h3>@ReleaseParser.Improvement released in version @release.Version</h3>
+
+                    foreach (var issue in releaseFeatures)
+                    {
+                        var url = issue.Url;
+                        <ul>
+                            <li>
+                                <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    }
+    if (tasks > 0)
+    {
+        <div id="@ReleaseParser.Task.Replace(" ","").ToLower()" class="status @ReleaseParser.Task.Replace(" ","").ToLower()">
+            <h2>@ReleaseParser.Task</h2>
+            @foreach (var release in selectedReleases)
+            {
+                var releaseFeatures = release.Task.ToList();
+                if (releaseFeatures.Any())
+                {
+                    <h3>@ReleaseParser.Task completed in version @release.Version</h3>
+
+                    foreach (var issue in releaseFeatures)
+                    {
+                        var url = issue.Url;
+                        <ul>
+                            <li>
+                                <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    }
+    if (tests > 0)
+    {
+        <div id="@ReleaseParser.Test.Replace(" ","").ToLower()" class="status @ReleaseParser.Test.Replace(" ","").ToLower()">
+            <h2>@ReleaseParser.Test</h2>
+            @foreach (var release in selectedReleases)
+            {
+                var releaseFeatures = release.Test.ToList();
+                if (releaseFeatures.Any())
+                {
+                    <h3>@ReleaseParser.Test added in version @release.Version</h3>
+
+                    foreach (var issue in releaseFeatures)
+                    {
+                        var url = issue.Url;
+                        <ul>
+                            <li>
+                                <a href="@(url)" target="_blank" rel="noreferrer noopener">@issue.Title</a>
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    }
+}
+                    
+ </div>
 }

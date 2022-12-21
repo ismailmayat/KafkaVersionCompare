@@ -11,7 +11,11 @@
     
 }
 
-<div class="text-center">
-    <h1 class="display-4">Kafka Version compare</h1>
-    @await Html.PartialAsync("_ReleasesDropDown",majorVersionGroups)
+<div class="container">
+    <div class="row markdown-syntax douh">
+        <div class="col-sm-12">
+            <h1 class="display-4">Kafka Version compare</h1>
+            @await Html.PartialAsync("_ReleasesDropDown",majorVersionGroups)
+        </div>
+    </div>
 </div>

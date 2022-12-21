@@ -19,3 +19,11 @@ X
 ,KafkaVersionCompare/Services/UrlScheduler.cs,0/b/0b8b4d090cde4d5a10a14b7fe7cea50da9d11d93
 h
 8KafkaVersionCompareTests/KafkaVersionCompareTests.csproj,3/5/3506911697e469713fd93549f81da3aeba38ed59
+N
+KafkaVersionCompare/Program.cs,a/c/ac8a28eb37cd2338a7f8e5eff5c93bb486b1407b
+V
+&KafkaVersionCompareTests/CrawlTests.cs,7/8/78878e0226d7fedaf8e981e783b72ad79d6d86c4
+i
+9KafkaVersionCompare/Services/ReleasePageCrawlerBuilder.cs,f/a/fa09233b3269c3dea643d415620454a3246dd6eb
+^
+.KafkaVersionCompareTests/TestData/Failing.html,5/0/507b8edfbb8f5ba8e361ba254ac3dded8adf61ed

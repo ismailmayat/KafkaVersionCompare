@@ -16,3 +16,113 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.release .explain {
+  margin-top: 20px;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.release .explain h2 {
+  margin-top: 12px;
+  font-size: 2em;
+  margin-bottom: .3rem;
+  color: rgba(0,0,0,.8);
+}
+
+.release .dot {
+  border: none;
+}
+
+.release .dot.big {
+  position: relative;
+  text-indent: 0;
+  margin: 15px !important;
+  float: left;
+}
+
+.statuses ul {
+  list-style-type: none;
+}
+
+.statuses ul li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.statuses li:before {
+  position: absolute;
+  top: -4px;
+  left: -25px;
+  font-size: 1.5em;
+}
+
+.release .markdown-syntax a {
+  text-decoration: none;
+}
+
+.release .markdown-syntax a:hover {
+  text-decoration: underline;
+}
+
+.markdown-syntax.douh {
+  margin-top: 0 !important;
+}
+
+.release .chart {
+  height: 60px;
+  width: 60px;
+  top: inherit;
+  left: inherit;
+  text-align: center;
+}
+
+.release .chart p {
+  vertical-align: middle;
+  line-height: 2.7rem;
+  display: inline-block;
+}
+
+.release .chart canvas {
+  top: 0;
+  left: 0;
+}
+
+.release .chartDesc {
+  float: left;
+  position: relative;
+  line-height: 3.6em;
+}
+
+.release select {
+  border-radius: 0;
+  padding: 10px;
+  background-position: 95% center;
+  float: left;
+}
+
+.release .titles {
+  padding: 12px 15px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.release .to {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.release .button {
+  float: right;
+}
+
+.explain .col-xs-12 {
+  min-height: 50px;
+}
+
+.error {
+  color: red !important;
+}
