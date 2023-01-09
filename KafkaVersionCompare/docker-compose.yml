@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  web:
+    image: kafka-version-compare
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
