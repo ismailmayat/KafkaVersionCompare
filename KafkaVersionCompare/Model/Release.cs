@@ -28,31 +28,29 @@ namespace KafkaVersionCompare.Model;
         public DateTime ReleaseDate { get; set; }
 
 
-        [JsonProperty("issues")] public IReadOnlyList<Issue> Issues { get; set; } 
+        [JsonProperty("issues")] 
+        public IReadOnlyList<Issue> Issues { get; set; } 
 
-        [JsonProperty("subTask")]
+        [JsonProperty("subTasks")]
         public IReadOnlyList<Issue> SubTask { get; set; }
 
-        [JsonProperty("currentRelease")]
+        [JsonProperty("currentReleases")]
         public bool CurrentRelease { get; set; }
         
-        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonProperty("bug")]
         public IReadOnlyList<Issue> Bug { get; set; }
-
-        [System.Text.Json.Serialization.JsonIgnore]
+        
+        [JsonProperty("improvements")]
         public IReadOnlyList<Issue> Improvement { get; set; }
         
-        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonProperty("newFeatures")]
         public IReadOnlyList<Issue> NewFeature { get; set; }
         
-        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonProperty("tasks")]
         public IReadOnlyList<Issue> Task { get; set; }
         
-        [System.Text.Json.Serialization.JsonIgnore]
+        [JsonProperty("tests")]
         public IReadOnlyList<Issue> Test { get; set; }
-
-        [JsonProperty("categorizedIssues")]
-        public List<Category>? CategorizedIssues { get; set; }
         
         public class Issue
         {
@@ -67,18 +65,4 @@ namespace KafkaVersionCompare.Model;
 
         }
         
-        public class Category
-        {
-            [JsonProperty("name")]
-            public string? Name { get; set; }
-
-            [System.Text.Json.Serialization.JsonIgnore]
-            public List<string> MatchingLabels { get; set; }
-
-            [JsonProperty("priority")]
-            public int Priority { get; set; }
-
-            [JsonProperty("issues")]
-            public List<Issue> Issues { get; set; }
-        }
     }

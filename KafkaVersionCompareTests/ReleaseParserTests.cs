@@ -96,9 +96,8 @@ public class ReleaseParserTests
         releaseParser = new ReleaseParser();
 
         Action act = () => releaseParser.BuildRelease(document, "0.10.1");
+       
         act.Should().NotThrow<Exception>();
         
-      
     }
-
 }
