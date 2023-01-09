@@ -1,0 +1,118 @@
+Release Notes - Kafka - Version 0.10.0.0
+
+<h2>        Sub-task
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2068'>KAFKA-2068</a>] -         Replace OffsetCommit Request/Response with  org.apache.kafka.common.requests  equivalent
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2069'>KAFKA-2069</a>] -         Replace OffsetFetch request/response with their   org.apache.kafka.common.requests  equivalent
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2070'>KAFKA-2070</a>] -         Replace OffsetRequest/response with ListOffsetRequest/response from org.apache.kafka.common.requests
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2071'>KAFKA-2071</a>] -         Replace Produce Request/Response with their org.apache.kafka.common.requests equivalents
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2072'>KAFKA-2072</a>] -         Add StopReplica request/response to o.a.k.common.requests and replace the usage in core module
+    </li>
+</ul>
+
+<h2>        Bug
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-725'>KAFKA-725</a>] -         Broker Exception: Attempt to read with a maximum offset less than start offset
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1148'>KAFKA-1148</a>] -         Delayed fetch/producer requests should be satisfied on a leader change
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1554'>KAFKA-1554</a>] -         Corrupt index found on clean startup
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1860'>KAFKA-1860</a>] -         File system errors are not detected unless Kafka tries to write
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2146'>KAFKA-2146</a>] -         adding partition did not find the correct startIndex
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2157'>KAFKA-2157</a>] -         kafka-console-consumer.sh: Mismatch in CLI &quot;usage&quot; docs vs. Scala Option parsing
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2181'>KAFKA-2181</a>] -         online doc issues
+    </li>
+</ul>
+
+<h2>        Improvement
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1215'>KAFKA-1215</a>] -         Rack-Aware replica assignment option
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2511'>KAFKA-2511</a>] -         KIP-31 &amp; KIP-32: message format change + adding timestamp to messages
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2547'>KAFKA-2547</a>] -         Make DynamicConfigManager to use the ZkNodeChangeNotificationListener introduced as part of KAFKA-2211
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2668'>KAFKA-2668</a>] -         Add a metric that records the total number of metrics
+    </li>
+</ul>
+
+<h2>        New Feature
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2832'>KAFKA-2832</a>] -         support exclude.internal.topics in new consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3046'>KAFKA-3046</a>] -         add ByteBuffer Serializer&amp;Deserializer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3490'>KAFKA-3490</a>] -         Multiple version support for ducktape performance tests
+    </li>
+</ul>
+
+<h2>        Task
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2830'>KAFKA-2830</a>] -         Change default fix version to 0.9.1.0 in kafka-merge-pr.py
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2845'>KAFKA-2845</a>] -         Add 0.9 clients vs 0.8 brokers compatibility test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2896'>KAFKA-2896</a>] -         System test for partition re-assignment
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3435'>KAFKA-3435</a>] -         Remove `Unstable` annotation from new Java Consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3460'>KAFKA-3460</a>] -         Remove old 0.7 KafkaMigrationTool
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3517'>KAFKA-3517</a>] -         Document configuration of SASL/PLAIN and multiple mechanisms
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3618'>KAFKA-3618</a>] -         Handle ApiVersionRequest before SASL handshake
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3621'>KAFKA-3621</a>] -         Add tests for ApiVersionRequest/Response
+    </li>
+</ul>
+
+<h2>        Test
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2732'>KAFKA-2732</a>] -         Add test cases with ZK Auth, SASL and SSL
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2825'>KAFKA-2825</a>] -         Add controller failover to existing replication tests
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2846'>KAFKA-2846</a>] -         Add Ducktape test for kafka-consumer-groups
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2905'>KAFKA-2905</a>] -         System test for rolling upgrade to enable ZooKeeper ACLs with SASL
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2949'>KAFKA-2949</a>] -         Make EndToEndAuthorizationTest replicated
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2979'>KAFKA-2979</a>] -         Enable authorizer and ACLs in ducktape tests
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-2989'>KAFKA-2989</a>] -         Verify all partitions consumed after rebalancing in system tests
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3214'>KAFKA-3214</a>] -         Add consumer system tests for compressed topics
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3255'>KAFKA-3255</a>] -         Extra unit tests for NetworkClient.connectionDelay(Node node, long now)
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3371'>KAFKA-3371</a>] -         ClientCompatibilityTest system test failing since KIP-31/KIP-32 was merged
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3520'>KAFKA-3520</a>] -         System tests of config validate and list connectors REST APIs
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3597'>KAFKA-3597</a>] -         Enable query ConsoleConsumer and VerifiableProducer if they shutdown cleanly
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3617'>KAFKA-3617</a>] -         Add unit tests for SASL authentication
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3634'>KAFKA-3634</a>] -         Add ducktape tests for upgrade with SASL
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3675'>KAFKA-3675</a>] -         Add lz4 to parametrized `test_upgrade` system test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-3676'>KAFKA-3676</a>] -         Add system tests for connector pause/resume
+    </li>
+</ul>
+        

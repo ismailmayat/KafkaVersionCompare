@@ -1,0 +1,687 @@
+
+
+Release Notes - Kafka - Version 0.8.0
+
+
+
+<h2>        New Feature
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-50'>KAFKA-50</a>] -         kafka intra-cluster replication support
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-188'>KAFKA-188</a>] -         Support multiple data directories
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-202'>KAFKA-202</a>] -         Make the request processing in kafka asynchonous
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-203'>KAFKA-203</a>] -         Improve Kafka internal metrics
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-235'>KAFKA-235</a>] -         Add a &#39;log.file.age&#39; configuration parameter to force rotation of log files after they&#39;ve reached a certain age
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-429'>KAFKA-429</a>] -         Expose JMX operation to set logger level dynamically
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-475'>KAFKA-475</a>] -         Time based log segment rollout
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-545'>KAFKA-545</a>] -         Add a Performance Suite for the Log subsystem
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-546'>KAFKA-546</a>] -         Fix commit() in zk consumer for compressed messages
+    </li>
+</ul>
+
+<h2>        Improvement
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-100'>KAFKA-100</a>] -         ProducerShell should use high-level producer instead of SyncProducer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-133'>KAFKA-133</a>] -         Publish kafka jar to a public maven repository
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-139'>KAFKA-139</a>] -         cross-compile multiple Scala versions and upgrade to SBT 0.12.1
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-155'>KAFKA-155</a>] -         Support graceful Decommissioning of Broker
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-165'>KAFKA-165</a>] -         Add helper script for zkCli.sh
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-181'>KAFKA-181</a>] -         Log errors for unrecognized config options
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-187'>KAFKA-187</a>] -         Add Snappy Compression as a Codec and refactor CompressionUtil and option on startup to select what the default codec
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-193'>KAFKA-193</a>] -         use by name parameter helper for logging and trait to include lazy logging and refactor code to use the new LogHelper
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-246'>KAFKA-246</a>] -         log configuration values used
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-253'>KAFKA-253</a>] -         Refactor the async producer to have only one queue instead of one queue per broker in a Kafka cluster
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-258'>KAFKA-258</a>] -         Remove broker.id from the broker.list config in the Producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-267'>KAFKA-267</a>] -         Enhance ProducerPerformance to generate unique random Long value for payload
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-271'>KAFKA-271</a>] -         Modify new FetchResponse object to remove the initial offset field
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-281'>KAFKA-281</a>] -         support multiple root log directories
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-285'>KAFKA-285</a>] -         Increase maximum value of log.retention.size
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-314'>KAFKA-314</a>] -         Go Client Multi-produce
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-323'>KAFKA-323</a>] -         Add the ability to use the async producer in the Log4j appender
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-324'>KAFKA-324</a>] -         enforce broker.id to be a non-negative integer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-325'>KAFKA-325</a>] -         revisit broker config in 0.8
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-349'>KAFKA-349</a>] -         Create individual &quot;Response&quot; types for each kind of request and wrap them with &quot;BoundedByteBufferSend&quot;, remove &quot;xxResponseSend&quot; types for all requests except &quot;FetchRequest&quot;
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-365'>KAFKA-365</a>] -         change copyright in NOTICE to 2012
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-366'>KAFKA-366</a>] -         add jmx beans in broker to track # bytes in consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-368'>KAFKA-368</a>] -         use the pig core jar from maven instead of distributing it
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-393'>KAFKA-393</a>] -         Add constructor for message which takes both byte array offset and length
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-408'>KAFKA-408</a>] -         ProducerPerformance does not work with all producer config options
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-437'>KAFKA-437</a>] -         Unused var statement in ZookeeperConsumerConnectorTest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-439'>KAFKA-439</a>] -         @returns was used in scala doc when it should have been @return
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-505'>KAFKA-505</a>] -         Remove errorcode from TopicMetaDataResponse
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-548'>KAFKA-548</a>] -         remove partition from ProducerRequestPartitionData and FetchResponsePartitionData
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-581'>KAFKA-581</a>] -         provides windows batch script for starting Kafka/Zookeeper
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-632'>KAFKA-632</a>] -         ProducerRequest should take ByteBufferMessageSet instead of MessageSet
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-638'>KAFKA-638</a>] -         remove ProducerShell
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-667'>KAFKA-667</a>] -         Rename .highwatermark file
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-675'>KAFKA-675</a>] -         Only bind to the interface declared in the &#39;hostname&#39; config property
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-699'>KAFKA-699</a>] -         Disallow clients to set replicaId in FetchRequest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-762'>KAFKA-762</a>] -         Improve second replica assignment
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-763'>KAFKA-763</a>] -         Add an option to replica from the largest offset during unclean leader election
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-812'>KAFKA-812</a>] -         Support deep iteration in DumpLogSegments tool
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-850'>KAFKA-850</a>] -         add an option to show under replicated partitions in list topic command
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-923'>KAFKA-923</a>] -         Improve controller failover latency
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-931'>KAFKA-931</a>] -         make zookeeper.connect a required property
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1046'>KAFKA-1046</a>] -         Added support for Scala 2.10 builds while maintaining compatibility with 2.8.x
+    </li>
+</ul>
+
+<h2>        Task
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-93'>KAFKA-93</a>] -         Change code header to follow standard ASF source header
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-317'>KAFKA-317</a>] -         Add support for new wire protocol to Go client
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-341'>KAFKA-341</a>] -         Create a new single host system test to validate all replicas on 0.8 branch
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-348'>KAFKA-348</a>] -         rebase 0.8 branch from trunk
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-380'>KAFKA-380</a>] -         Enhance single_host_multi_brokers test with failure to trigger leader re-election in replication
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-440'>KAFKA-440</a>] -         Create a regression test framework for distributed environment testing
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-526'>KAFKA-526</a>] -         System Test should remove the top level data log directory
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-594'>KAFKA-594</a>] -         Update System Test due to new argument &quot;--sync&quot; in ProducerPerformance
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-605'>KAFKA-605</a>] -         System Test - Log Retention Cases should wait longer before getting the common starting offset in replica log segments
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-688'>KAFKA-688</a>] -         System Test - Update all testcase_xxxx_properties.json for properties keys uniform naming convention
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-737'>KAFKA-737</a>] -         System Test : Disable shallow.iterator in Mirror Maker test cases to make compression work correctly
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-791'>KAFKA-791</a>] -         Fix validation bugs in System Test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-792'>KAFKA-792</a>] -         Update multiple attributes in testcase_xxxx_properties.json
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-819'>KAFKA-819</a>] -         System Test : Add validation of log segment index to offset
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-883'>KAFKA-883</a>] -         System Test - update migration tool testsuite after 0.7 ProducerPerformance sends seq MessageID
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-922'>KAFKA-922</a>] -         System Test - set retry.backoff.ms=300 to testcase_0119
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-932'>KAFKA-932</a>] -         System Test - set retry.backoff.ms=300 to all test cases
+    </li>
+</ul>
+<h2>        Sub-task
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-176'>KAFKA-176</a>] -         Fix existing perf tools
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-237'>KAFKA-237</a>] -         create/delete ZK path for a topic in an admin tool
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-239'>KAFKA-239</a>] -         Wire existing producer and consumer to use the new ZK data structure
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-240'>KAFKA-240</a>] -         implement new producer and consumer request format
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-329'>KAFKA-329</a>] -         Remove the watches/broker for new topics and partitions and change create topic admin API to send start replica state change to all brokers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-335'>KAFKA-335</a>] -         Implement an embedded controller
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-336'>KAFKA-336</a>] -         add an admin RPC to communicate state changes between the controller and the broker
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-337'>KAFKA-337</a>] -         upgrade ZKClient to allow conditional updates in ZK
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-338'>KAFKA-338</a>] -         controller failover
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-339'>KAFKA-339</a>] -         using MultiFetch in the follower
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-342'>KAFKA-342</a>] -         revisit the broker startup procedure according to V3 design
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-343'>KAFKA-343</a>] -         revisit the become leader and become follower state change operations using V3 design
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-344'>KAFKA-344</a>] -         migration tool from 0.7 to 0.8
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-356'>KAFKA-356</a>] -         Create a generic Kafka thread class that includes basic boiler plate code of instantiating and shutting down threads cleanly
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-362'>KAFKA-362</a>] -         ZookeeperConsumerConnector needs to connect to new leader after leadership change
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-369'>KAFKA-369</a>] -         remove ZK dependency on producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-458'>KAFKA-458</a>] -         remove errorcode from ByteBufferMessageSet
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-482'>KAFKA-482</a>] -         Make producer to run for the entire duration of the System Test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-488'>KAFKA-488</a>] -         Port Mirroring System Test to this python system test framework
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-492'>KAFKA-492</a>] -         Sometimes the python system test framework doesn&#39;t terminate all running processes
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-494'>KAFKA-494</a>] -         Relative paths should be used for svg URLs in dashboards html
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-502'>KAFKA-502</a>] -         Simplify setup / initialization in replication_basic_test.py
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-503'>KAFKA-503</a>] -         Support &quot;testcase_to_run&quot; or &quot;testcase_to_skip&quot;
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-507'>KAFKA-507</a>] -         Shut down ZK last to avoid hanging brokers running processes
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-513'>KAFKA-513</a>] -         Add state change log to Kafka brokers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-571'>KAFKA-571</a>] -         Add more test cases to System Test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-731'>KAFKA-731</a>] -         ~/ivy2/cache should be a variable in the kafka-run-class bash script
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-780'>KAFKA-780</a>] -         Reassign partitions tool produces NPE in shutdown handler
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-814'>KAFKA-814</a>] -         Controller should not throw exception when a preferred replica is already the leader for a partition
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-843'>KAFKA-843</a>] -         Re-add the release-zip sbt target
+    </li>
+</ul>
+
+<h2>        Bug
+</h2>
+<ul>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-15'>KAFKA-15</a>] -         SBT release-zip target doesn&#39;t include bin and config directories anymore
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-42'>KAFKA-42</a>] -         Support rebalancing the partitions with replication
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-43'>KAFKA-43</a>] -         Rebalance to preferred broke with intra-cluster replication support
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-46'>KAFKA-46</a>] -         Commit thread, ReplicaFetcherThread for intra-cluster replication
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-49'>KAFKA-49</a>] -         Add acknowledgement to the produce request.
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-81'>KAFKA-81</a>] -         wrong path in bin/kafka-run-class.sh
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-97'>KAFKA-97</a>] -         SocketServer.scala refers to Handler-specific variables
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-171'>KAFKA-171</a>] -         Kafka producer should do a single write to send message sets
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-192'>KAFKA-192</a>] -         CompressionUtilTest does not run and fails when it does
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-229'>KAFKA-229</a>] -         SimpleConsumer is not logging exceptions correctly so detailed stack trace is not coming in the logs
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-233'>KAFKA-233</a>] -         The producer&#39;s load balancing logic can send requests to dead brokers, when using the async producer option
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-259'>KAFKA-259</a>] -         Give better error message when trying to run shell scripts without having built/downloaded the jars yet
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-295'>KAFKA-295</a>] -         Bug in async producer DefaultEventHandler retry logic
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-305'>KAFKA-305</a>] -         SyncProducer does not correctly timeout
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-306'>KAFKA-306</a>] -         broker failure system test broken on replication branch
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-351'>KAFKA-351</a>] -         Refactor some new components introduced for replication
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-352'>KAFKA-352</a>] -         Throw exception to client if it makes a produce/consume request to a Kafka broker for a topic that hasn&#39;t been created
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-367'>KAFKA-367</a>] -         StringEncoder/StringDecoder use platform default character set
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-370'>KAFKA-370</a>] -         Exception &quot;java.util.NoSuchElementException: None.get&quot; appears inconsistently in Mirror Maker log.
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-371'>KAFKA-371</a>] -         Creating topic of empty string puts broker in a bad state
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-376'>KAFKA-376</a>] -         expose different data to fetch requests from the follower replicas and consumer clients
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-379'>KAFKA-379</a>] -         TopicCount.constructTopicCount isn&#39;t thread-safe
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-385'>KAFKA-385</a>] -         RequestPurgatory enhancements - expire/checkSatisfy issue; add jmx beans
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-386'>KAFKA-386</a>] -         Race condition in accessing ISR
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-391'>KAFKA-391</a>] -         Producer request and response classes should use maps
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-396'>KAFKA-396</a>] -         Mirroring system test fails on 0.8
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-412'>KAFKA-412</a>] -         deal with empty TopicData list in producer and fetch request
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-413'>KAFKA-413</a>] -         single_host_multi_brokers system test fails on laptop
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-415'>KAFKA-415</a>] -         Controller throws NoSuchElementException while marking a broker failed
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-416'>KAFKA-416</a>] -         Controller tests throw several zookeeper errors
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-417'>KAFKA-417</a>] -         NullPointerException in ZookeeperConsumerConnector
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-418'>KAFKA-418</a>] -         NullPointerException in ConsumerFetcherManager
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-420'>KAFKA-420</a>] -         maintain HW correctly with only 1 replica in ISR
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-422'>KAFKA-422</a>] -         LazyInitProducerTest has transient test failure
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-424'>KAFKA-424</a>] -         Remove invalid mirroring arguments from kafka-server-start.sh
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-425'>KAFKA-425</a>] -         Wrong class name in performance test scripts
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-427'>KAFKA-427</a>] -         LogRecoverTest.testHWCheckpointWithFailuresSingleLogSegment has transient failure
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-428'>KAFKA-428</a>] -         need to update leaderAndISR path in ZK conditionally in ReplicaManager
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-431'>KAFKA-431</a>] -         LogCorruptionTest.testMessageSizeTooLarge fails occasionally
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-433'>KAFKA-433</a>] -         ensurePartitionLeaderOnThisBroker should not access ZK
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-434'>KAFKA-434</a>] -         IllegalMonitorStateException in ReplicaManager.makerFollower
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-453'>KAFKA-453</a>] -         follower replica may need to backoff the fetching if leader is not ready yet
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-456'>KAFKA-456</a>] -         ProducerSendThread calls ListBuffer.size a whole bunch. That is a O(n) operation
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-459'>KAFKA-459</a>] -         KafkaController.RequestSendThread can throw exception on broker socket
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-460'>KAFKA-460</a>] -         ControllerChannelManager needs synchronization btw shutdown and add/remove broker
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-461'>KAFKA-461</a>] -         remove support for format for magic byte 0 in 0.8
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-463'>KAFKA-463</a>] -         log.truncateTo needs to handle targetOffset smaller than the lowest offset in the log
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-464'>KAFKA-464</a>] -         KafkaController NPE in SessionExpireListener
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-466'>KAFKA-466</a>] -         Controller tests throw IllegalStateException
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-467'>KAFKA-467</a>] -         Controller based leader election failed ERROR messages in LazyInitProducerTest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-468'>KAFKA-468</a>] -         String#getBytes is platform dependent
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-470'>KAFKA-470</a>] -         transient unit test failure in RequestPurgatoryTest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-471'>KAFKA-471</a>] -         Transient failure in ProducerTest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-473'>KAFKA-473</a>] -         Use getMetadata Api in ZookeeperConsumerConnector
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-474'>KAFKA-474</a>] -         support changing host/port of a broker
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-481'>KAFKA-481</a>] -         Require values in Utils.getTopic* methods to be positive
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-490'>KAFKA-490</a>] -         Check max message size on server instead of producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-491'>KAFKA-491</a>] -         KafkaRequestHandler needs to handle exceptions
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-495'>KAFKA-495</a>] -         Handle topic names with &quot;/&quot; on Kafka server
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-497'>KAFKA-497</a>] -         recover consumer during unclean leadership change
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-499'>KAFKA-499</a>] -         Refactor controller state machine
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-500'>KAFKA-500</a>] -         javaapi support for getTopoicMetaData
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-501'>KAFKA-501</a>] -         getOfffset Api needs to return different latest offset to regular and follower consumers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-506'>KAFKA-506</a>] -         Store logical offset in log
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-508'>KAFKA-508</a>] -         split out partiondata from fetchresponse and producerrequest
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-509'>KAFKA-509</a>] -         server should shut down on encountering invalid highwatermark file
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-510'>KAFKA-510</a>] -         broker needs to know the replication factor per partition
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-511'>KAFKA-511</a>] -         offset returned in Producer response may not be correct
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-512'>KAFKA-512</a>] -         Remove checksum from ByteBufferMessageSet.iterator
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-514'>KAFKA-514</a>] -         Replication with Leader Failure Test: Log segment files checksum mismatch
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-516'>KAFKA-516</a>] -         Consider catching all exceptions in ShutdownableThread
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-525'>KAFKA-525</a>] -         newly created partitions are not added to ReplicaStateMachine
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-528'>KAFKA-528</a>] -         IndexOutOfBoundsException thrown by kafka.consumer.ConsumerFetcherThread
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-531'>KAFKA-531</a>] -         kafka.server.ReplicaManager: java.nio.channels.NonWritableChannelException
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-537'>KAFKA-537</a>] -         expose clientId and correlationId in ConsumerConfig
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-539'>KAFKA-539</a>] -         Replica.hw should be initialized to the smaller of checkedpointed HW and log end offset
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-540'>KAFKA-540</a>] -         log.append() should halt on IOException
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-553'>KAFKA-553</a>] -         confusing reference to zk.connect in config/producer.properties
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-556'>KAFKA-556</a>] -         Change MessageSet.sizeInBytes to Int
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-557'>KAFKA-557</a>] -         Replica fetch thread doesn&#39;t need to recompute message id
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-562'>KAFKA-562</a>] -         Non-failure System Test Log Segment File Checksums mismatched
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-563'>KAFKA-563</a>] -         KafkaScheduler shutdown in ZookeeperConsumerConnector should check for config.autocommit
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-567'>KAFKA-567</a>] -         Replication Data Loss in Mirror Maker Bouncing testcase
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-573'>KAFKA-573</a>] -         System Test : Leader Failure Log Segment Checksum Mismatched When request-num-acks is 1
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-575'>KAFKA-575</a>] -         Partition.makeFollower() reads broker info from ZK
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-576'>KAFKA-576</a>] -         SimpleConsumer throws UnsupportedOperationException: empty.head
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-577'>KAFKA-577</a>] -         extend DumpLogSegments to verify consistency btw data and index
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-578'>KAFKA-578</a>] -         Leader finder thread in ConsumerFetcherManager needs to handle exceptions
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-579'>KAFKA-579</a>] -         remove connection timeout in SyncProducer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-580'>KAFKA-580</a>] -         system test testcase_0122 under replication fails due to large # of data loss
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-584'>KAFKA-584</a>] -         produce/fetch remote time metric not set correctly when num.acks = 1
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-586'>KAFKA-586</a>] -         system test configs are broken
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-591'>KAFKA-591</a>] -         Add test cases to test log size retention and more
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-592'>KAFKA-592</a>] -         Register metrics beans at kafka server startup
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-596'>KAFKA-596</a>] -         LogSegment.firstAppendTime not reset after truncate to
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-604'>KAFKA-604</a>] -         Add missing metrics in 0.8
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-608'>KAFKA-608</a>] -         getTopicMetadata does not respect producer config settings
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-612'>KAFKA-612</a>] -         move shutting down of fetcher thread out of critical path
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-613'>KAFKA-613</a>] -         MigrationTool should disable shallow iteration in the 0.7 consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-614'>KAFKA-614</a>] -         DumpLogSegment offset verification is incorrect for compressed messages
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-618'>KAFKA-618</a>] -         Deadlock between leader-finder-thread and consumer-fetcher-thread during broker failure
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-622'>KAFKA-622</a>] -         Create mbeans per client
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-625'>KAFKA-625</a>] -         Improve MessageAndMetadata to expose the partition
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-634'>KAFKA-634</a>] -         ConsoleProducer compresses messages and ignores the --compress flag
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-646'>KAFKA-646</a>] -         Provide aggregate stats at the high level Producer and ZookeeperConsumerConnector level
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-648'>KAFKA-648</a>] -         Use uniform convention for naming properties keys
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-664'>KAFKA-664</a>] -         Kafka server threads die due to OOME during long running test
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-668'>KAFKA-668</a>] -         Controlled shutdown admin tool should not require controller JMX url/port to be supplied
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-669'>KAFKA-669</a>] -         Irrecoverable error on leader while rolling to a new segment
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-673'>KAFKA-673</a>] -         Broker recovery check logic is reversed
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-680'>KAFKA-680</a>] -         ApiUtils#writeShortString uses String length instead of byte length
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-681'>KAFKA-681</a>] -         Unclean shutdown testing - truncateAndStartWithNewOffset is not invoked when it is expected to
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-684'>KAFKA-684</a>] -         ConsoleProducer does not have the queue-size option
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-690'>KAFKA-690</a>] -         TopicMetadataRequest throws exception when no topics are specified
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-691'>KAFKA-691</a>] -         Fault tolerance broken with replication factor 1
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-692'>KAFKA-692</a>] -         ConsoleConsumer outputs diagnostic message to stdout instead of stderr
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-693'>KAFKA-693</a>] -         Consumer rebalance fails if no leader available for a partition and stops all fetchers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-695'>KAFKA-695</a>] -         Broker shuts down due to attempt to read a closed index file
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-698'>KAFKA-698</a>] -         broker may expose uncommitted data to a consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-701'>KAFKA-701</a>] -         ConsoleProducer does not exit correctly and fix some config properties following KAFKA-648
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-702'>KAFKA-702</a>] -         Deadlock between request handler/processor threads
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-708'>KAFKA-708</a>] -         ISR becomes empty while marking a partition offline
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-710'>KAFKA-710</a>] -         Some arguments are always set to default in ProducerPerformance
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-713'>KAFKA-713</a>] -         Update Hadoop producer for Kafka 0.8 changes
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-718'>KAFKA-718</a>] -         kafka-run-class.sh should use reasonable gc settings
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-726'>KAFKA-726</a>] -         Add ReplicaFetcherThread name to mbean names
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-732'>KAFKA-732</a>] -         MirrorMaker with shallow.iterator.enable=true produces unreadble messages
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-738'>KAFKA-738</a>] -         correlationId is not set in FetchRequest in AbstractFetcherThread
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-743'>KAFKA-743</a>] -         PreferredReplicaLeaderElectionCommand has command line error
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-748'>KAFKA-748</a>] -         Append to index fails due to invalid offset
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-750'>KAFKA-750</a>] -         inconsistent index offset during broker startup
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-751'>KAFKA-751</a>] -         Fix windows build script - kafka-run-class.bat
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-753'>KAFKA-753</a>] -         Kafka broker shuts down while loading segments
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-755'>KAFKA-755</a>] -         standardizing json values stored in ZK
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-756'>KAFKA-756</a>] -         Processor thread blocks due to infinite loop during fetch response send
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-757'>KAFKA-757</a>] -         System Test Hard Failure cases : &quot;Fatal error during KafkaServerStable startup&quot; when hard-failed broker is re-started
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-758'>KAFKA-758</a>] -         startHighWaterMarksCheckPointThread is never called
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-767'>KAFKA-767</a>] -         Message Size check should be done after assigning the offsets
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-768'>KAFKA-768</a>] -         broker should exit if hitting exceptions durin startup
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-769'>KAFKA-769</a>] -         On startup, a brokers highwatermark for every topic partition gets reset to zero
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-770'>KAFKA-770</a>] -         KafkaConfig properties should be verified in the constructor
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-772'>KAFKA-772</a>] -         System Test Transient Failure on testcase_0122
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-776'>KAFKA-776</a>] -         Changing ZK format breaks some tools
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-779'>KAFKA-779</a>] -         Standardize Zk data structures for Re-assign partitions and Preferred replication election
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-785'>KAFKA-785</a>] -         Resolve bugs in PreferredReplicaLeaderElection admin tool
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-786'>KAFKA-786</a>] -         Use &quot;withRequiredArg&quot; while parsing jopt options in all tools
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-793'>KAFKA-793</a>] -         Include controllerId in all requests sent by controller
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-798'>KAFKA-798</a>] -         Use biased histograms instead of uniform histograms in KafkaMetricsGroup
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-800'>KAFKA-800</a>] -         inSyncReplica in Partition needs some tweaks
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-801'>KAFKA-801</a>] -         Fix MessagesInPerSec mbean to count uncompressed message rate
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-804'>KAFKA-804</a>] -         Incorrect index in the log of a follower
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-807'>KAFKA-807</a>] -         LineMessageReader doesn&#39;t correctly parse the key separator
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-809'>KAFKA-809</a>] -         Dependency on zkclient 0.1 (redundant) prevents building in IntelliJ
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-811'>KAFKA-811</a>] -         Fix clientId in migration tool
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-813'>KAFKA-813</a>] -         Minor cleanup in Controller
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-825'>KAFKA-825</a>] -         KafkaController.isActive() needs to be synchronized
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-826'>KAFKA-826</a>] -         Make Kafka 0.8 depend on metrics 2.2.0 instead of 3.x
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-827'>KAFKA-827</a>] -         improve list topic output format
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-828'>KAFKA-828</a>] -         Preferred Replica Election does not delete the admin path on controller failover
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-830'>KAFKA-830</a>] -         partition replica assignment map in the controller should be a Set
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-832'>KAFKA-832</a>] -         0.8 Consumer prevents rebalance if consumer thread is blocked or slow
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-840'>KAFKA-840</a>] -         Controller tries to perform preferred replica election on failover before state machines have started up
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-846'>KAFKA-846</a>] -         AbstractFetcherThread should do shallow instead of deep iteration
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-856'>KAFKA-856</a>] -         Correlation id for OffsetFetch request (#2) always responds with 0
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-861'>KAFKA-861</a>] -         IndexOutOfBoundsException while fetching data from leader
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-866'>KAFKA-866</a>] -         Recover segment does shallow iteration to fix index causing inconsistencies
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-871'>KAFKA-871</a>] -         Rename ZkConfig properties
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-872'>KAFKA-872</a>] -         Socket server does not set send/recv buffer sizes
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-879'>KAFKA-879</a>] -         In system test, read the new leader from zookeeper instead of broker log on completion of become-leader state transition
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-880'>KAFKA-880</a>] -         NoLeaderPartitionSet should be cleared before leader finder thread is started up
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-884'>KAFKA-884</a>] -         Get java.lang.NoSuchMethodError: com.yammer.metrics.core.TimerContext.stop()J when stopping kafka brokers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-895'>KAFKA-895</a>] -         Protocol documentation is not clear about requiredAcks = 0.
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-899'>KAFKA-899</a>] -         LeaderNotAvailableException the first time a new message for a partition is processed.
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-900'>KAFKA-900</a>] -         ClosedByInterruptException when high-level consumer shutdown normally
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-903'>KAFKA-903</a>] -         [0.8.0 - windows]  FATAL - [highwatermark-checkpoint-thread1] (Logging.scala:109) - Attempt to swap the new high watermark file with the old one failed
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-905'>KAFKA-905</a>] -         Logs can have same offsets causing recovery failure
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-907'>KAFKA-907</a>] -         controller needs to close socket channel to brokers on exception
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-914'>KAFKA-914</a>] -         Deadlock between initial rebalance and watcher-triggered rebalances
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-916'>KAFKA-916</a>] -         Deadlock between fetcher shutdown and handling partitions with error
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-919'>KAFKA-919</a>] -         Disabling of auto commit is ignored during consumer group rebalancing
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-920'>KAFKA-920</a>] -         zkclient jar 0.2.0 is not compatible with 0.1.0
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-921'>KAFKA-921</a>] -         Expose max lag mbean for consumers and replica fetchers
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-927'>KAFKA-927</a>] -         Integrate controlled shutdown into kafka shutdown hook
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-937'>KAFKA-937</a>] -         ConsumerFetcherThread can deadlock
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-938'>KAFKA-938</a>] -         High CPU usage when more or less idle
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-939'>KAFKA-939</a>] -         ./sbt publish-local fails due to invalid javac flags passed to javadoc
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-940'>KAFKA-940</a>] -         Scala match error in javaapi.Implicits
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-941'>KAFKA-941</a>] -         Add Apache 2.0 license to missing code source files
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-942'>KAFKA-942</a>] -         the version of the jar should be 0.8.0-beta1 not 0.8.0-SNAPSHOT
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-944'>KAFKA-944</a>] -         the pom output from publish and publish-local is not accurate
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-946'>KAFKA-946</a>] -         Kafka Hadoop Consumer fails when verifying message checksum
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-947'>KAFKA-947</a>] -         isr-expiration-thread may block LeaderAndIsr request for a relatively long period
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-950'>KAFKA-950</a>] -         bytesSinceLastIndexEntry needs to be reset after log segment is truncated
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-951'>KAFKA-951</a>] -         Leader election rate may be reported on a non-controller
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-953'>KAFKA-953</a>] -         Remove release-zip from README we are not releasing with it
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-954'>KAFKA-954</a>] -         tidy up README file for better general availability
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-955'>KAFKA-955</a>] -         After a leader change, messages sent with ack=0 are lost
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-956'>KAFKA-956</a>] -         High-level consumer fails to check topic metadata response for errors
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-959'>KAFKA-959</a>] -         DefaultEventHandler can send more produce requests than necesary
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-963'>KAFKA-963</a>] -         when publishing to maven repository central missing signature on everything
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-964'>KAFKA-964</a>] -         Default hadoop-producer configs to request.required.acks = 1
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-968'>KAFKA-968</a>] -         Typographical Errors in Output
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-969'>KAFKA-969</a>] -         Need to prevent failure of rebalance when there are no brokers available when consumer comes up
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-974'>KAFKA-974</a>] -         can&#39;t use public release maven repo because of failure of downloaded dependency
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-978'>KAFKA-978</a>] -         kafka pom file has 2 entries for zookeeper (one with exclusion, one without)
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-987'>KAFKA-987</a>] -         Avoid checkpointing offsets in Kafka consumer that have not changed since the last commit
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-989'>KAFKA-989</a>] -         Race condition shutting down high-level consumer results in spinning background thread
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-991'>KAFKA-991</a>] -         Reduce the queue size in hadoop producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-994'>KAFKA-994</a>] -         High level consumer doesn&#39;t throw an exception when the message it is trying to fetch exceeds the configured fetch size
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1003'>KAFKA-1003</a>] -         ConsumerFetcherManager should pass clientId as metricsPrefix to AbstractFetcherManager
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1008'>KAFKA-1008</a>] -         Unmap before resizing
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1010'>KAFKA-1010</a>] -         Concurrency issue in getCluster() causes rebalance failure and dead consumer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1017'>KAFKA-1017</a>] -         High number of open file handles in 0.8 producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1018'>KAFKA-1018</a>] -         tidy up the POM from what feedback has come from the 0.8 beta and publishing to maven
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1029'>KAFKA-1029</a>] -         Zookeeper leader election stuck in ephemeral node retry loop
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1030'>KAFKA-1030</a>] -         Addition of partitions requires bouncing all the consumers of that topic
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1031'>KAFKA-1031</a>] -         Little modification to the stop script to be able to kill the proper process
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1035'>KAFKA-1035</a>] -         Add message-send-max-retries and retry-backoff-ms options to console producer
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1038'>KAFKA-1038</a>] -         fetch response should use empty messageset instead of null when handling errors
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1068'>KAFKA-1068</a>] -         OfflinePartitionCount metrics may be incorrect after the controller failover
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1069'>KAFKA-1069</a>] -         MBean kafka.cluster.Partition report wrong UnderReplicated status
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1071'>KAFKA-1071</a>] -         The random partition selected in DefaultEventHandler is not random across producer instances
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1073'>KAFKA-1073</a>] -         CheckReassignmentStatus is broken
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1075'>KAFKA-1075</a>] -         Consumer will not rebalance upon topic partition change
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1076'>KAFKA-1076</a>] -         system tests in 0.8 are broken due to wrong log4j config
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1078'>KAFKA-1078</a>] -         Update System Test to handle controller data returned by ZK
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1116'>KAFKA-1116</a>] -         Need to upgrade sbt-assembly to compile on scala 2.10.2
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1126'>KAFKA-1126</a>] -         Remove the DISCLAIMER it is left over from incubation
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1131'>KAFKA-1131</a>] -         copy some more files into the release tar and zip that are needed/desired
+    </li>
+    <li>[<a href='https://issues.apache.org/jira/browse/KAFKA-1133'>KAFKA-1133</a>] -         LICENSE and NOTICE files need to get into  META-INF when jars are built before they&#39;re signed for publishing to maven
+    </li>
+</ul>
+
+                
