@@ -5808,6 +5808,7 @@ footer {
   text-align: center;
   line-height: 1.5;
   width: 100%;
+  position:relative;
 }
 
 html {
