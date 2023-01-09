@@ -6,4 +6,4 @@ This asp.net core application builds a version compare page for Kafka. It uses t
 retrieves the release page and parses it to build the versions.  When dropdowns allow you to pick 2 versions and a delta is created and displayed to show the differences.
 
 ### Run using Docker ###
-
+docker-compose up -d
