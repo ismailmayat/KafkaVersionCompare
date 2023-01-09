@@ -9253,27 +9253,31 @@ section.packages nav a {
   color: white;
 }
 
-.release-page .explain h2 {
+.release .explain h2 {
   margin: 0;
   font-size: 2em;
   color: rgba(0, 0, 0, 0.8);
 }
 
-.release-page .explain small {
+.release .explain small {
   margin-bottom: 0;
 }
 
-.release-page .dot {
+.release .dot {
   border: none;
+  display: block;
+  position: relative;
+  margin-top: 13px;
+  background-color: #7682d6;
 }
 
-.release-page .dot.big {
+.release .dot.big {
   position: relative;
   text-indent: 0;
   margin: 0;
 }
 
-.release-page .chart {
+.release .chart {
   height: 60px;
   width: 60px;
   top: initial;
@@ -9281,13 +9285,13 @@ section.packages nav a {
   text-align: center;
 }
 
-.release-page .chart p {
+.release .chart p {
   vertical-align: middle;
   line-height: 3.7rem;
   display: inline-block;
 }
 
-.release-page .chart canvas {
+.release .chart canvas {
   top: 0px;
   left: 0px;
 }
@@ -9390,13 +9394,13 @@ section.packages nav a {
   }
 }
 
-.release-page h2 {
+.release h2 {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 0;
 }
 
-.release-page h3 {
+.release h3 {
   font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 0;
@@ -9468,9 +9472,14 @@ section.packages nav a {
 
 .release .dot.big {
   position: relative;
-  text-indent: 0;
-  margin: 15px !important;
   float: left;
+  height: 60px;
+  width: 60px;
+  border-radius: 40px;
+  font-size: 2rem;
+  line-height: 3.5rem;
+  text-indent: 0.7rem;
+  color: #12173b;
 }
 
 .statuses ul {
@@ -9523,8 +9532,8 @@ section.packages nav a {
 
 .release .chartDesc {
   float: left;
+  clear:both;
   position: relative;
-  line-height: 3.6em;
 }
 
 .release select {
