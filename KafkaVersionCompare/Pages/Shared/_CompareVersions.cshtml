@@ -218,3 +218,7 @@
                     
  </div>
 }
+@if(fromVersion > toVersion)
+{
+    <p class="error">Can't compare versions that are equal to each other or where the "to" is lower than the "from".</p>
+}
