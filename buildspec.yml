@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 6
+  pre_build:
+    commands:
+      - echo Restore dependencies...
+      - dotnet restore
+  build:
+    commands:
+      - echo Building the application...
+      - dotnet build -c Release
+  post_build:
+    commands:
+      - echo Running tests...
+      - dotnet test --no-build
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
