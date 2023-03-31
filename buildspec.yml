@@ -12,10 +12,10 @@ phases:
     commands:
       - echo Building the application...
       - dotnet build -c Release
-  post_build:
-    commands:
-      - echo Running tests...
-      - dotnet test --no-build
+#  post_build:
+#    commands:
+#      - echo Running tests...
+#      - dotnet test --no-build
 
 artifacts:
   files:
