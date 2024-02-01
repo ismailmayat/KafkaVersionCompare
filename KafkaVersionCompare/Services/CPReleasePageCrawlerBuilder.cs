@@ -124,13 +124,17 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
             }
             else
             {
-                _releases.Add(release);  
+                _releases.Add(release);
             }
 
         }
+        catch (System.ArgumentException ex)
+        {
+            _logger.LogWarning($"could process {e.CrawledPage.Uri.AbsolutePath} - version {version}");
+        }
         catch (Exception ex)
         {
-            _logger.LogError($"could process {e.CrawledPage.Uri.AbsolutePath} {ex}");
+            _logger.LogError($"could process {e.CrawledPage.Uri.AbsolutePath} {ex} - version {version}");
         }
     }
 

@@ -66,6 +66,7 @@ public class CPReleaseParser
     static string RemoveNonPrintableCharacters(string input)
     {
         // Use a regular expression to remove non-printable characters
-        return Regex.Replace(input, @"[^\u0020-\u007E]", string.Empty);
+       // return Regex.Replace(input, @"[^\u0020-\u007E]", string.Empty);
+       return input.Replace("¶", string.Empty);
     }
 }

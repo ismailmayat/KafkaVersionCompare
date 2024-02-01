@@ -19,8 +19,8 @@ builder.Services.AddSingleton<CPReleaseParser>();
 builder.Services.AddScoped<ICPReleaseBuilder>(ctr => new CPReleasePageCrawlerBuilder(cpCurrentReleaseUrl,
     cpBaseUrl,ctr.GetService<CPReleaseParser>(),ctr.GetService<ILoggerFactory>().CreateLogger<CPReleasePageCrawlerBuilder>(),ctr.GetService<IMemoryCache>()));
 
-builder.Services.AddMemoryCache();
-builder.Services.AddHostedService<CacheInitializationService>();
+//builder.Services.AddMemoryCache();
+//builder.Services.AddHostedService<CacheInitializationService>();
 
 var app = builder.Build();
 
