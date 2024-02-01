@@ -31,25 +31,33 @@
         .ToList();
     
     <div class="col-sm-12 statuses">
-        <table>
-            <tr>
-                <th>Section</th>
-                <th>Version @fromVersion.ToString()</th>
-                <th>Version @toVersion.ToString()</th>
-            </tr>
-            @{
-                foreach (var section in uniqueSections)
-                {
-                    <tr>
-                        <td>@(section.SectionTitle)</td>
-                        <td></td>
-                        <td>&nbsp;</td>
-                    </tr>                
-                }
-            }
-        </table>
- 
-
+        @{
+                        foreach (var section in uniqueSections)
+                        {
+                            var matchingSections = selectedReleases
+                                .Where(cpRelease =>
+                                    cpRelease.Sections.Any(s =>
+                                        s.SectionTitle == section.SectionTitle)
+                                ).ToList();
+                            
+                            <h3>@(section.SectionTitle)</h3>
+                            <table>
+                                <tr>
+                                    <th>
+                                        Version     
+                                    </th>
+                                </tr>
+                                @foreach (var item in matchingSections)
+                                {
+                                    <tr>
+                                        <td>@(item.Version) <br/>
+                                            @Html.Raw(item.Sections.Where(x=>x.SectionTitle==section.SectionTitle).First().SectionBody)
+                                            </td>
+                                    </tr>
+                                }
+                            </table>                           
+                        }
+                    }
     </div>
 }
 
