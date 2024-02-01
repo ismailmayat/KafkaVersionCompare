@@ -8,14 +8,14 @@ using Microsoft.Playwright;
 
 namespace KafkaVersionCompare.Services;
 
-public class CPReleaseBuilder
+public class CPReleasePageCrawlerBuilder
 {
     private readonly string _cpCurrentReleasePage;
     private readonly string _cpReleaseBasePage;
-    private readonly ILogger<CPReleaseBuilder> _logger;
+    private readonly ILogger<CPReleasePageCrawlerBuilder> _logger;
     private readonly IMemoryCache _cache;
 
-    public CPReleaseBuilder(string cpCurrentReleasePage,string cpReleaseBasePage,ILogger<CPReleaseBuilder> logger,IMemoryCache cache)
+    public CPReleasePageCrawlerBuilder(string cpCurrentReleasePage,string cpReleaseBasePage,ILogger<CPReleasePageCrawlerBuilder> logger,IMemoryCache cache)
     {
         _cpCurrentReleasePage = cpCurrentReleasePage;
         _cpReleaseBasePage = cpReleaseBasePage;
@@ -27,17 +27,16 @@ public class CPReleaseBuilder
     {
         string key = "cp_releases";
         
-        // var releases = await
-        //     
-        //     _cache.GetOrCreateAsync(key, entry =>
-        //     {
-        //         entry.SlidingExpiration = TimeSpan.FromDays(1);
-        //         return Task.Run(Build);
-        //     });
-        //
-        // return releases;
-
-        return await Build();
+         var releases = await
+             
+             _cache.GetOrCreateAsync(key, entry =>
+             {
+                 entry.SlidingExpiration = TimeSpan.FromDays(1);
+                 return Task.Run(Build);
+             });
+        
+         return releases;
+         
     }
 
     private async Task<IReadOnlyList<CpRelease>> Build()

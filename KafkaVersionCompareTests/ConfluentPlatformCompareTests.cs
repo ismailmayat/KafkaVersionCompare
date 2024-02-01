@@ -8,21 +8,17 @@ using NUnit.Framework;
 namespace KafkaVersionCompareTests;
 
 [TestFixture]
-public class ConfluentPlatformCompare
+public class ConfluentPlatformCompareTests
 {
     [Test]
     public async Task Can_Get_CP_Versions()
     {
         Microsoft.Playwright.Program.Main(new[] { "install" });
-        // https://docs.confluent.io/platform/current/release-notes/index.html
-        
-        // https://docs.confluent.io/platform/{0}/release-notes/index.html
-        
-        // "/html/body/main//select[@id='version-select']"
-        var cpReleaseBuilder = new CPReleaseBuilder(
+
+        var cpReleaseBuilder = new CPReleasePageCrawlerBuilder(
             "https://docs.confluent.io/platform/current/release-notes/index.html",
             "https://docs.confluent.io/platform/{0}/release-notes/index.html",
-            Substitute.For<ILogger<CPReleaseBuilder>>(), Substitute.For<IMemoryCache>());
+            Substitute.For<ILogger<CPReleasePageCrawlerBuilder>>(), Substitute.For<IMemoryCache>());
 
         var versions = await cpReleaseBuilder.BuildReleaseFromCrawl();
 
