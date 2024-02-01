@@ -11,7 +11,7 @@
     
     var releases = await CpReleaseBuilder.BuildReleaseFromCrawl();
 
-   // var compare = new Comparison(fromVersion, toVersion, releases);
+    var compare = new CpComparison(fromVersion, toVersion, releases);
 }
 
 <form name="compare" method="get" href="@Context.Request.Path">
@@ -77,3 +77,4 @@
         </div>
     </div>
 </form>
+@await Html.PartialAsync("Shared/Confluent-Platform/_CompareVersions",compare)

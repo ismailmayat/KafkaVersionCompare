@@ -1,3 +1,4 @@
+@using KafkaVersionCompare.Model
 @model KafkaVersionCompare.Model.CpComparison
 @{
     var fromVersion = Model.From;
@@ -5,3 +6,55 @@
     var releases = Model.Releases;
 }
 
+@if (fromVersion != null && toVersion != null && fromVersion < toVersion)
+{
+    
+    var selectedReleases = new List<CpRelease>();
+    List<CpRelease.Section> uniqueSections;
+    
+    foreach (var release in  releases.OrderByDescending(x => x.Version).Where(release => release.Version != fromVersion && (release.Version >= fromVersion) && (release.Version <= toVersion)))
+    {
+        var foundRelease = releases.FirstOrDefault(x => x.Version == release.Version);
+
+        if (foundRelease == null)
+        {
+            continue;
+        }
+
+        selectedReleases.Add(foundRelease);
+        
+    }
+    uniqueSections = selectedReleases
+        .SelectMany(cpRelease => cpRelease.Sections)
+        .GroupBy(section => section.SectionTitle)
+        .Select(group => group.First())
+        .ToList();
+    
+    <div class="col-sm-12 statuses">
+        <table>
+            <tr>
+                <th>Section</th>
+                <th>Version @fromVersion.ToString()</th>
+                <th>Version @toVersion.ToString()</th>
+            </tr>
+            @{
+                foreach (var section in uniqueSections)
+                {
+                    
+                    <tr>
+                        <td>@(section.SectionTitle)</td>
+                        <td></td>
+                        <td>&nbsp;</td>
+                    </tr>                
+                }
+            }
+        </table>
+ 
+
+    </div>
+}
+
+@if(fromVersion > toVersion)
+{
+    <p class="error">Can't compare versions that are equal to each other or where the "to" is lower than the "from".</p>
+}
