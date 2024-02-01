@@ -53,7 +53,7 @@ public class CPReleaseParser
             }
 
             section.SectionTitle = sectionTitle;
-            section.SectionBody = htmlSection.OuterHtml;
+            section.SectionBody = RemoveNonPrintableCharacters(htmlSection.OuterHtml);
             
             sections.Add(section);
         }
