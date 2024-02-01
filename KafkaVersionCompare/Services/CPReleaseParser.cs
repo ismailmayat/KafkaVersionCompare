@@ -1,4 +1,4 @@
-using System.Collections.Specialized;
+using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using KafkaVersionCompare.Model;
@@ -49,7 +49,7 @@ public class CPReleaseParser
             }
             else
             {
-                sectionTitle = title.Text();
+                sectionTitle = RemoveNonPrintableCharacters(title.Text());
             }
 
             section.SectionTitle = sectionTitle;
@@ -61,5 +61,11 @@ public class CPReleaseParser
         var cprelease = new CpRelease(sections);
         
         return cprelease;
+    }
+    
+    static string RemoveNonPrintableCharacters(string input)
+    {
+        // Use a regular expression to remove non-printable characters
+        return Regex.Replace(input, @"[^\u0020-\u007E]", string.Empty);
     }
 }

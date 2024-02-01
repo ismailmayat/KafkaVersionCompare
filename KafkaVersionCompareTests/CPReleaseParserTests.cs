@@ -39,6 +39,7 @@ public class CPReleaseParserTests
     [Test]
     public void Can_Parse()
     {
+        Console.WriteLine(_release.Sections.First().SectionTitle);
         _release.Version.Should().Be(new Version("6.0"));
     }
 }
