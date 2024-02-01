@@ -1,21 +1,15 @@
 ﻿@page
-@using KafkaVersionCompare.Services
-@model IndexModel
-@inject IReleaseBuilder ReleaseBuilder
-@{
-    ViewData["Title"] = "Home page";
-
-    var releases = await ReleaseBuilder.BuildReleaseFromCrawl();
-   
-    var majorVersionGroups = releases.GroupBy(x => x.Version.Major).OrderByDescending(x => x.Key).ToList();
-    
-}
-
 <div class="container">
     <div class="row markdown-syntax douh">
         <div class="col-sm-12">
             <h1 class="display-4">Kafka Version compare</h1>
-            @await Html.PartialAsync("_ReleasesDropDown",majorVersionGroups)
+            <div>
+                
+                <a asp-area="" asp-page="/KafkaCompare">Kafka Compare</a>
+            </div>
+            <div>
+                Confluent Platform Compare
+            </div>
         </div>
     </div>
 </div>

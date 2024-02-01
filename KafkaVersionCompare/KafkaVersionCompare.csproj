@@ -13,4 +13,8 @@
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages\Shared\Confluent-Platform" />
+    </ItemGroup>
+
 </Project>
