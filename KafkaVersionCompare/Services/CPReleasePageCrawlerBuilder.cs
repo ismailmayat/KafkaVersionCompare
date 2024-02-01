@@ -1,4 +1,5 @@
 using Abot2.Core;
+using Abot2.Crawler;
 using Abot2.Poco;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
@@ -20,7 +21,7 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
     private readonly CPReleaseParser _cpReleaseParser;
     private readonly ILogger<CPReleasePageCrawlerBuilder> _logger;
     private readonly IMemoryCache _cache;
-
+    private List<CpRelease> _releases = new();
     public CPReleasePageCrawlerBuilder(string cpCurrentReleasePage,string cpReleaseBasePage,CPReleaseParser cpReleaseParser,ILogger<CPReleasePageCrawlerBuilder> logger,IMemoryCache cache)
     {
         _cpCurrentReleasePage = cpCurrentReleasePage;
@@ -60,13 +61,11 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
         var versionsSelect =
             document.QuerySelector("select#version-select");
 
-        var releases = new List<CpRelease>();
+        var releasePages = new List<string>();
 
         if (versionsSelect.HasChildNodes)
         {
             var versions = versionsSelect.ChildNodes.Where(x => !x.Text().Contains("Legacy Docs"));
-            
-            var releasePages = new List<string>();
             
             foreach (var optionNode in versions)
             {
@@ -74,11 +73,65 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
                
                 string releasePageUrl = string.Format(_cpReleaseBasePage, version);
                 releasePages.Add(releasePageUrl);
-                releases.Add(_cpReleaseParser.BuildRelease(null,version));
+           
             }
         }
 
+        var releases = await BuildReleaseFromCrawl(releasePages);
+        
         return releases;
+    }
+    
+    private async Task<IReadOnlyList<CpRelease>> BuildReleaseFromCrawl(IEnumerable<string> releasePageUrls)
+    {
+
+        var config = new CrawlConfiguration
+        {
+            MaxCrawlDepth = 0
+        };
+
+        _logger.LogInformation($"processing {releasePageUrls.Count()} release page urls");
+        
+        // Create a custom scheduler that is pre-queued with the list
+        // of URLs to crawl.
+        var scheduler = new UrlScheduler(releasePageUrls.OrderByDescending(x=>x));
+        
+        var crawler = new PoliteWebCrawler(config, null, null, scheduler, null, null, null, null, null);
+        
+        crawler.PageCrawlCompleted += PageCrawlCompleted;
+    
+        await crawler.CrawlAsync(new Uri(_cpCurrentReleasePage));
+    
+        _logger.LogInformation($"created {_releases.Count()} releases");
+        
+        return _releases;
+    }
+
+    private void PageCrawlCompleted(object? sender, PageCrawlCompletedArgs e)
+    {
+        //url looks like /platform/7.4/release-notes/index.html
+        string version = e.CrawledPage.Uri.AbsolutePath.Split('/')[2];
+
+        _logger.LogInformation($"building release for {version} using url {e.CrawledPage.Uri.AbsolutePath}");
+
+        try
+        {
+            var release = _cpReleaseParser.BuildRelease(e.CrawledPage.AngleSharpHtmlDocument, version);
+
+            if (release == null || release.Version == null || release.Version.Major == null)
+            {
+                _logger.LogWarning($"parsing issue with {e.CrawledPage.Uri.AbsolutePath}");
+            }
+            else
+            {
+                _releases.Add(release);  
+            }
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"could process {e.CrawledPage.Uri.AbsolutePath} {ex}");
+        }
     }
 
     /// <summary>

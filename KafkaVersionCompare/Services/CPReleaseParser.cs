@@ -19,7 +19,13 @@ public class CPReleaseParser
     private CpRelease PopulateRelease(IHtmlDocument htmlDocument)
     {
         var releaseNotes = htmlDocument.QuerySelector("div#cp-version-release-notes");
-        
+
+        if (releaseNotes == null)
+        {
+            //special case for 6.0 
+            releaseNotes = htmlDocument.QuerySelector("div#cp-6-0-0-release-notes");
+        }
+
         var htmlSections = releaseNotes.QuerySelectorAll("div.section").Where(s=>!s.Id.Contains("how-to-download") && !s.Id.Contains("questions"));
 
         List<CpRelease.Section> sections = new List<CpRelease.Section>();
@@ -27,18 +33,26 @@ public class CPReleaseParser
         foreach (var htmlSection in htmlSections)
         {
             var section = new CpRelease.Section();
+            
+            var title = htmlSection.QuerySelector("h2");
 
             string sectionTitle = string.Empty;
-
-            var title = htmlSection.QuerySelector("h2");
             
             if (title == null)
             {
                 title = htmlSection.QuerySelector("h3");
             }
 
+            if (title == null)
+            {
+                sectionTitle = "issue with title - " + htmlSection.Id;
+            }
+            else
+            {
+                sectionTitle = title.Text();
+            }
 
-            section.SectionTitle =title.Text();
+            section.SectionTitle = sectionTitle;
             section.SectionBody = htmlSection.OuterHtml;
             
             sections.Add(section);

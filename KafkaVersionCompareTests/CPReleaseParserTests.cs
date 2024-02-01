@@ -18,7 +18,7 @@ public class CPReleaseParserTests
         Assembly assembly = Assembly.GetExecutingAssembly();
 
         // Get a stream for the HTML file
-        Stream stream = assembly.GetManifestResourceStream("KafkaVersionCompareTests.TestData.CPReleasePage.html");
+        Stream stream = assembly.GetManifestResourceStream("KafkaVersionCompareTests.TestData.CPReleasePage60.html");
 
         string html=string.Empty;
         // Read the HTML file into a string
@@ -33,12 +33,12 @@ public class CPReleaseParserTests
 
         releaseParser = new CPReleaseParser();
 
-        _release = releaseParser.BuildRelease(document,"7.5");
+        _release = releaseParser.BuildRelease(document,"6.0");
     }
 
     [Test]
     public void Can_Parse()
     {
-        _release.Version.Should().Be(new Version("7.5"));
+        _release.Version.Should().Be(new Version("6.0"));
     }
 }
