@@ -5,11 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <PlaywrightPlatform>all</PlaywrightPlatform>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Abot" Version="2.0.70" />
       <PackageReference Include="HtmlAgilityPack.CssSelectors.NetCore" Version="1.2.1" />
+      <PackageReference Include="Microsoft.Playwright" Version="1.41.2" />
       <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     </ItemGroup>
 

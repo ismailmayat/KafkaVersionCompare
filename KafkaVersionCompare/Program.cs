@@ -1,6 +1,9 @@
 using KafkaVersionCompare.Services;
 using Microsoft.Extensions.Caching.Memory;
 
+//need this to execute page with js to get initial cp versions
+Microsoft.Playwright.Program.Main(new[] { "install" });
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
