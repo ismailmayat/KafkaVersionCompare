@@ -39,20 +39,20 @@
                                     cpRelease.Sections.Any(s =>
                                         s.SectionTitle == section.SectionTitle)
                                 ).ToList();
-                            
-                            <h3>@(section.SectionTitle)</h3>
                             <table>
                                 <tr>
                                     <th>
                                         Version     
                                     </th>
+                                    <th>Section</th>
                                 </tr>
                                 @foreach (var item in matchingSections)
                                 {
                                     <tr>
-                                        <td>@(item.Version) <br/>
-                                            @Html.Raw(item.Sections.Where(x=>x.SectionTitle==section.SectionTitle).First().SectionBody)
-                                            </td>
+                                        <td>@(item.Version)
+                                            
+                                        </td>
+                                        <td>@Html.Raw(item.Sections.Where(x=>x.SectionTitle==section.SectionTitle).First().SectionBody)</td>
                                     </tr>
                                 }
                             </table>                           
