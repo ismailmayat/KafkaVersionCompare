@@ -22,7 +22,7 @@ public class ConfluentPlatformCompareTests
 
         var cpReleaseBuilder = new CPReleasePageCrawlerBuilder(
             "https://docs.confluent.io/platform/current/release-notes/index.html",
-            "https://docs.confluent.io/platform/{0}/release-notes/index.html",
+            "https://docs.confluent.io/platform/{0}/release-notes/index.html",new CPReleaseParser(),
             Substitute.For<ILogger<CPReleasePageCrawlerBuilder>>(), Substitute.For<IMemoryCache>());
 
         var versions = await cpReleaseBuilder.BuildReleaseFromCrawl();

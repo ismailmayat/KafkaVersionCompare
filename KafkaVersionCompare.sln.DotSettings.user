@@ -12,5 +12,6 @@
     &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.CrawlTests.Can_Crawl&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.ConfluentPlatformCompare.Can_Get_CP_Versions&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.ConfluentPlatformCompareTests.Can_Get_CP_Versions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::C932887E-EF92-4992-8A77-A6F72D9F6ECF::net6.0::KafkaVersionCompareTests.CPReleaseParserTests.Can_Parse&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

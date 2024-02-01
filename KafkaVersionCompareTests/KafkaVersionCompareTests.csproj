@@ -31,6 +31,8 @@
       </EmbeddedResource>
       <None Remove="TestData\Failing.html" />
       <EmbeddedResource Include="TestData\Failing.html" />
+      <None Remove="TestData\CPReleasePage.html" />
+      <EmbeddedResource Include="TestData\CPReleasePage.html" />
     </ItemGroup>
 
 </Project>

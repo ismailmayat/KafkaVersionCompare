@@ -17,13 +17,15 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
 {
     private readonly string _cpCurrentReleasePage;
     private readonly string _cpReleaseBasePage;
+    private readonly CPReleaseParser _cpReleaseParser;
     private readonly ILogger<CPReleasePageCrawlerBuilder> _logger;
     private readonly IMemoryCache _cache;
 
-    public CPReleasePageCrawlerBuilder(string cpCurrentReleasePage,string cpReleaseBasePage,ILogger<CPReleasePageCrawlerBuilder> logger,IMemoryCache cache)
+    public CPReleasePageCrawlerBuilder(string cpCurrentReleasePage,string cpReleaseBasePage,CPReleaseParser cpReleaseParser,ILogger<CPReleasePageCrawlerBuilder> logger,IMemoryCache cache)
     {
         _cpCurrentReleasePage = cpCurrentReleasePage;
         _cpReleaseBasePage = cpReleaseBasePage;
+        _cpReleaseParser = cpReleaseParser;
         _logger = logger;
         _cache = cache;
     }
@@ -69,14 +71,10 @@ public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
             foreach (var optionNode in versions)
             {
                 string version = optionNode.Text().Replace(" (current)", String.Empty);
-                var release = new CpRelease
-                {
-                    Version = new Version(version)
-                };
-
+               
                 string releasePageUrl = string.Format(_cpReleaseBasePage, version);
-                releasePages .Add(releasePageUrl);
-                releases.Add(release);
+                releasePages.Add(releasePageUrl);
+                releases.Add(_cpReleaseParser.BuildRelease(null,version));
             }
         }
 
