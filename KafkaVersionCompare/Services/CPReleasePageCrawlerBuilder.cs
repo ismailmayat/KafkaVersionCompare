@@ -8,7 +8,12 @@ using Microsoft.Playwright;
 
 namespace KafkaVersionCompare.Services;
 
-public class CPReleasePageCrawlerBuilder
+public interface ICPReleaseBuilder
+{
+    Task<IReadOnlyList<CpRelease>> BuildReleaseFromCrawl();
+}
+
+public class CPReleasePageCrawlerBuilder:ICPReleaseBuilder
 {
     private readonly string _cpCurrentReleasePage;
     private readonly string _cpReleaseBasePage;
@@ -42,8 +47,7 @@ public class CPReleasePageCrawlerBuilder
     private async Task<IReadOnlyList<CpRelease>> Build()
     {
         _logger.LogInformation("running cp crawl");
-
-        //need to get page content with js exectued 
+        
         var htmlContent = await GetPageContentWithJsExecuted();
 
         var parser = new HtmlParser();
@@ -60,13 +64,18 @@ public class CPReleasePageCrawlerBuilder
         {
             var versions = versionsSelect.ChildNodes.Where(x => !x.Text().Contains("Legacy Docs"));
             
+            var releasePages = new List<string>();
+            
             foreach (var optionNode in versions)
             {
+                string version = optionNode.Text().Replace(" (current)", String.Empty);
                 var release = new CpRelease
                 {
-                    Version = new Version(optionNode.Text().Replace(" (current)",String.Empty))
+                    Version = new Version(version)
                 };
-                
+
+                string releasePageUrl = string.Format(_cpReleaseBasePage, version);
+                releasePages .Add(releasePageUrl);
                 releases.Add(release);
             }
         }
@@ -74,6 +83,10 @@ public class CPReleasePageCrawlerBuilder
         return releases;
     }
 
+    /// <summary>
+    /// gets page content with js exectued 
+    /// </summary>
+    /// <returns></returns>
     private async Task<string> GetPageContentWithJsExecuted()
     {
         using var playwright = await Playwright.CreateAsync();

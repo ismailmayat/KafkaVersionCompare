@@ -10,10 +10,15 @@ namespace KafkaVersionCompareTests;
 [TestFixture]
 public class ConfluentPlatformCompareTests
 {
+    [SetUp]
+    public void Init()
+    {
+        Microsoft.Playwright.Program.Main(new[] { "install" });
+    }
+
     [Test]
     public async Task Can_Get_CP_Versions()
     {
-        Microsoft.Playwright.Program.Main(new[] { "install" });
 
         var cpReleaseBuilder = new CPReleasePageCrawlerBuilder(
             "https://docs.confluent.io/platform/current/release-notes/index.html",
@@ -22,6 +27,6 @@ public class ConfluentPlatformCompareTests
 
         var versions = await cpReleaseBuilder.BuildReleaseFromCrawl();
 
-        versions.Count.Should().BePositive();
+        versions.Count.Should().BeGreaterThan(7);
     }
 }
