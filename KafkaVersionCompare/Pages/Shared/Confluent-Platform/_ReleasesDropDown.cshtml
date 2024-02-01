@@ -1,0 +1,79 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using KafkaVersionCompare.Model
+@using KafkaVersionCompare.Services
+@model List<IGrouping<int,KafkaVersionCompare.Model.CpRelease>>
+@inject ICPReleaseBuilder CpReleaseBuilder
+
+@{
+
+    Version.TryParse(Context.Request.Query["from"], out var fromVersion);
+    Version.TryParse(Context.Request.Query["to"], out var toVersion);
+    
+    var releases = await CpReleaseBuilder.BuildReleaseFromCrawl();
+
+   // var compare = new Comparison(fromVersion, toVersion, releases);
+}
+
+<form name="compare" method="get" href="@Context.Request.Path">
+    <div class="row release">
+        <div class="col-xs-6 col-sm-4">
+            <div class="row">
+                <div class="col-sm-3 titles">From:</div>
+                <div class="col-sm-9">
+                    <select name="from">
+                        @foreach (var majorVersion in Model)
+                        {
+                            var releases = majorVersion.OrderByDescending(x => x.Version);
+                            <optgroup label="@majorVersion.Key">
+                                @foreach (var release in releases)
+                                {
+                                    if (fromVersion != null && release.Version.ToString() == fromVersion.ToString())
+                                    {
+                                        <option name="@release.Version" selected="selected" value="@release.Version">@release.Version</option>
+                                    }
+                                    else
+                                    {
+                                        <option name="@release.Version" value="@release.Version">@release.Version</option>
+                                    }
+                                }
+                            </optgroup>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="row">
+                <div class="col-sm-3 titles">To:</div>
+                <div class="col-sm-9">
+                    <select name="to">
+                        @foreach (var majorVersion in Model)
+                        {
+                            var releases = majorVersion.OrderByDescending(x => x.Version);
+                            <optgroup label="@majorVersion.Key">
+                                @foreach (var release in releases)
+                                {
+                                    if (toVersion != null && release.Version.ToString() == toVersion.ToString())
+                                    {
+                                        <option name="@release.Version" selected="selected" value="@release.Version">@release.Version</option>
+                                    }
+                                    else
+                                    {
+                                        <option name="@release.Version" value="@release.Version">@release.Version</option>
+                                    }
+                                }
+                            </optgroup>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="submit" value="Compare" class="button" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

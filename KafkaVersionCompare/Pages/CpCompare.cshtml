@@ -1,0 +1,21 @@
+@page
+@using KafkaVersionCompare.Services
+@model IndexModel
+@inject ICPReleaseBuilder CPReleaseBuilder
+@{
+    ViewBag.Title = "Confluent Platform Version Compare";
+    Layout = "_Layout";
+    var releases = await CPReleaseBuilder.BuildReleaseFromCrawl();
+   
+    var majorVersionGroups = releases.GroupBy(x => x.Version.Major).OrderByDescending(x => x.Key).ToList();
+}
+
+<h2>Confluent Platfrom Compare</h2>
+<div class="container">
+    <div class="row markdown-syntax douh">
+        <div class="col-sm-12">
+            <h1 class="display-4">Confluent Platform Version compare</h1>
+            @await Html.PartialAsync("Shared/Confluent-Platform/_ReleasesDropDown",majorVersionGroups)
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@
 @model IndexModel
 @inject IReleaseBuilder ReleaseBuilder
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Kafka Version Compare";
 
     var releases = await ReleaseBuilder.BuildReleaseFromCrawl();
    
